@@ -39,6 +39,8 @@ const handleClick2 = () => {
 const router = useRouter();
 
   const clickTo = () => {
+    setState((prevData) => ({ ...prevData, company_name_en:  ""}));
+    setState((prevData) => ({ ...prevData, match:  false}));
     router.push('/updateinformation');
   };
   return (

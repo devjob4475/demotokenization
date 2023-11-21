@@ -157,7 +157,7 @@ fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}/api/register`,requestOption
             <TextField  id="jobTitle" name="jobTitle" label="Job Title"placeholder="Enter Your Job Title" size='small' value={state.jobTitle} onChange={handleInputChange}  style={{ width: '300px', height: '60px' }} focused color='primary'/>
             </Grid>
             <Grid item xs={4}>
-            <TextField disabled={state.match === true ? true:false} id="Email" name="company_email" label="Email"placeholder="example@thac.com" size='small'value={state.email} onChange={handleInputChange}  style={{ width: '300px', height: '60px' }} focused color='primary'/>
+            <TextField disabled id="Email" name="company_email" label="Email"placeholder="example@thac.com" size='small'value={state.email} onChange={handleInputChange}  style={{ width: '300px', height: '60px' }} focused color='primary'/>
             </Grid>     
             <Grid item xs={4}>
             <TextField  id="LastName" name="LastName" label="Last Name"placeholder="Enter Your Last Name" size='small' value={state.LastName} onChange={handleInputChange}  style={{ width: '300px', height: '60px' }} focused color='primary'/>
