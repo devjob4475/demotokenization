@@ -268,7 +268,7 @@ fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}/api/register`,requestOption
               <TextField disabled id="outlined-disabled"label="Disabled" value={state.jobTitle} size='small' sx={{ width: '70%' }} />
             </Grid>
             <Grid item xs={4}>
-              <TextField disabled id="outlined-disabled"label="Disabled" value={state.company_email} size='small' sx={{ width: '70%' }} />
+              <TextField disabled id="outlined-disabled"label="Disabled" value={state.email} size='small' sx={{ width: '70%' }} />
             </Grid>     
             <Grid item xs={4}>
               <TextField disabled id="outlined-disabled"label="Disabled" value={state.LastName} size='small' sx={{ width: '70%' }} />
@@ -282,7 +282,7 @@ fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}/api/register`,requestOption
           <Box p={3} sx={{color: `${themedata[0].ten}`, fontSize: 22, fontFamily: frontdata[0].font, fontWeight: '400', wordWrap: 'break-word'}}>Company Details</Box>
           <Grid item  container  pl={15}  columnSpacing={{ xs: 1, sm: 2, md: 3 }} sx={{  width: '50%' }}>
             <Grid item  xs={4} pb={2}>
-              <TextField disabled id="outlined-disabled"label="Disabled"value={state.CompanyName} size='small' sx={{ width: '70%' }} />
+              <TextField disabled id="outlined-disabled"label="Disabled"value={state.company_name_en} size='small' sx={{ width: '70%' }} />
             </Grid>
             <Grid item xs={4}>
               <TextField disabled id="outlined-disabled"label="Disabled"value={state.selectedCountry} size='small' sx={{ width: '70%' }} />
