@@ -41,7 +41,7 @@ const handleClose = () => {
   setState((prevData) => ({ ...prevData, open: false }));
 }
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}:${process.env.NEXT_PUBLIC_API_PORT_PROVINCE}/api1/countries`)
+    fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}/api1/countries`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Failed to load countries');
@@ -120,7 +120,7 @@ var requestOptions = {
   body: raw,
   redirect: 'follow'
 };
-fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}:${process.env.NEXT_PUBLIC_API_PORT_LOGIN}/api/register`,requestOptions)
+fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}/api/register`,requestOptions)
 .then(response => response.json())
 .then(result => {  
   if (result.status === "OK") {

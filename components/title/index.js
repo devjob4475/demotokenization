@@ -3,7 +3,7 @@ import React from 'react'
 
 function Index(props) {
   const pageTitle = `${props.namepage} | ${props.company}`;
-
+ 
   return (
     <div>
         <Head>
