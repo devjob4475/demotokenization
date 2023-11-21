@@ -52,7 +52,7 @@ function index() {
         <Box>
           <FormControlLabel  control={<Checkbox onClick={()=>{setstate((prevData) => ({ ...prevData, remember: !state.remember }));}}/>}label={LoginText[0].remember}sx={{'& .MuiSvgIcon-root': 
           { fontSize: 20 },' & .MuiTypography-root': { fontSize: 13, fontFamily: frontdata[0].font } }}/>
-          <Button onClick={()=>{router.push('/login')}} variant="text"sx={{color:`${themedata[0].secondary}`,textTransform:'capitalize', fontFamily: frontdata[0].font,fontSize: 13
+          <Button onClick={()=>{router.push('/forgot-password')}} variant="text"sx={{color:`${themedata[0].secondary}`,textTransform:'capitalize', fontFamily: frontdata[0].font,fontSize: 13
           ,}} >{LoginText[0].forgot}</Button>
         </Box>
         <Button variant='contained' onClick={handleClick} style={{ fontSize: '12px', padding: '6px 12px',backgroundColor:`${state.color.length > 0 ? state.color.find(item => item.theme === 'primary').hex : themedata[0].primary}`,width: '300px', height: 'auto',textTransform:'capitalize', fontFamily: frontdata[0].font,color:`${themedata[0].three}` }}>{state.loading?<Loading/>:buttontext[0].text}</Button>

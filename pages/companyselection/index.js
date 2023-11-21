@@ -4,6 +4,10 @@ import { themedata } from 'data/themedata';
 import { frontdata } from 'data/frontdata'; 
 import {MyContext} from 'context'
 import { Router, useRouter } from 'next/router'; 
+import Title from '@/components/title';
+import { buttontext } from '@/data/buttondata';
+import Loading from '@/components/loading'
+
 
 function Index() {
   const [clicked, setClicked] = useState(false);
@@ -39,11 +43,13 @@ const router = useRouter();
   };
   return (
       <Box sx={{background:`linear-gradient(${themedata[0].primary}, ${themedata[0].three})`,height:"100vh",width:'100%'}}>
+        <Title namepage="Company Selection" company="Partne Demo Tracthai"/>
         <Box p={3} sx={{display:'flex',flexDirection:'column', background: 'white',width:'60%',height:'auto',
         borderRadius: 5,justifyContent:'center',alignItems:'center',position:'absolute',top:'50%',left:'50%',
         transform: 'translate(-50%, -50%)'}}> 
           <Box sx={{ color: `${themedata[0].ten}`, fontSize: 20, fontFamily: frontdata[0].font, fontWeight: '800', 
           wordWrap: 'break-word'}}>Company Selection</Box>
+          <br></br>
           <Box pb={3} sx={{color: `${themedata[0].four}`, fontSize: 13, fontFamily: frontdata[0].font, fontWeight: '0', 
           textAlign: 'left'}}>Please Take A Look At The Companies Listed Below<br/> And Tell Us Whether You Are Working At Any Of Them</Box>
           <Box sx={{display:'flex',flexDirection:'row',justifyContent:'center'}}>
@@ -78,7 +84,7 @@ const router = useRouter();
         <Box p={5} >
           <Button   variant='contained'  sx={{fontSize: '12px', padding: '6px 12px',backgroundColor:`${themedata[0].primary}`,
           width: '300px', height: 'auto',textTransform:'capitalize', fontFamily: frontdata[0].font,color:`${themedata[0].three}`}}
-          disabled={clicked === false && selectedCompany === undefined} onClick={clickTo}>Next
+          disabled={clicked === false && selectedCompany === undefined} onClick={clickTo}>{state.loading?<Loading/>:buttontext[0].text}
           </Button> 
         </Box>
         </Box>

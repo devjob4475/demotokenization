@@ -7,6 +7,9 @@ import { themedata } from 'data/themedata';
 import { frontdata } from 'data/frontdata'; 
 import {MyContext} from 'context'
 import { Router, useRouter } from 'next/router';
+import Title from '@/components/title';
+import { buttontext } from '@/data/buttondata';
+import Loading from '@/components/loading'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -26,7 +29,7 @@ function index() {
 const [openAlert, setOpenAlert] = useState(false);
 
 const handleClickOpen = () => {
-   if (state.firstName && state.LastName && state.jobTitle && state.company_email && state.MobileNumber && state.CompanyName ) {
+   if (state.firstName && state.LastName && state.jobTitle && state.email && state.MobileNumber && state.company_name_en ) {
       setState((prevData) => ({ ...prevData, open: true }))
     
     console.log(state)
@@ -41,7 +44,7 @@ const handleClose = () => {
   setState((prevData) => ({ ...prevData, open: false }));
 }
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}:${process.env.NEXT_PUBLIC_API_PORT_PROVINCE}/api1/countries`)
+    fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}/api1/countries`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Failed to load countries');
@@ -98,11 +101,12 @@ const handleClose = () => {
     setState((prevState) => ({ ...prevState, [name]: value }));
   }
   const handleSubmit = async () => {
+    setState(prev => ({ ...prev, loading: true }));
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({
-    username: state.company_email,
+    username: state.email,
     firstname: "วรพล",
     surname: "อัศวนิก",
     firstname_en: state.firstName,
@@ -110,7 +114,7 @@ const handleClose = () => {
     mobile_phone: state.MobileNumber,
     personal_email: "woraponasvn36@gmail.com",
     company_name: "เดอะ รีโคฟเวอรี่ แอดไวเซอร์ จำกัด",
-    company_name_en: state.CompanyName,
+    company_name_en: state.company_name_en,
     credit_card: "1234123412341238",
     role: state.role,
 })
@@ -120,10 +124,11 @@ var requestOptions = {
   body: raw,
   redirect: 'follow'
 };
-fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}:${process.env.NEXT_PUBLIC_API_PORT_LOGIN}/api/register`,requestOptions)
+fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}/api/register`,requestOptions)
 .then(response => response.json())
 .then(result => {  
   if (result.status === "OK") {
+    setState(prev => ({ ...prev, loading:false  }));
     router.push('/checkyouemail');
   }else
   {
@@ -134,6 +139,7 @@ fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}:${process.env.NEXT_PUBLIC_A
 }
   return (
     <Box  sx={{background:`linear-gradient(${themedata[0].primary}, ${themedata[0].three})`,width:'100%',height:"130vh"}}>
+      <Title namepage="Updateinformation" company="Partne Demo Tracthai"/>
       <Box pt={3} sx={{display: "flex", alignItems: "center", justifyContent: "center" }}> 
       <Box p={1} sx={{ flexDirection:'column', background: 'white', width: '80%', height: '750px', borderRadius: 5, display: "flex", alignItems: "center", justifyContent: "center" }}> 
       <Box p={3}>
@@ -142,6 +148,7 @@ fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}:${process.env.NEXT_PUBLIC_A
               Please fill in the form. All fields marked with (*) shall be required.</Box>
           <Divider/>
           <Box p={1} sx={{color: `${themedata[0].four}`, fontSize: 22, fontFamily: frontdata[0].font, fontWeight: '400', wordWrap: 'break-word'}}>Personal Details</Box>
+          <br></br>
           <Grid item  container  pl={5}  columnSpacing={{ xs: 1, sm: 2, md: 3 }} sx={{  width: '50%' }}>
             <Grid item xs={4} pb={2}>
             <TextField  id="firstName" name="firstName" label="First Name"placeholder="Enter Your First Name" size='small' value={state.firstName} onChange={handleInputChange} style={{ width: '300px', height: '60px' }} focused color='primary'/>
@@ -150,7 +157,7 @@ fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}:${process.env.NEXT_PUBLIC_A
             <TextField  id="jobTitle" name="jobTitle" label="Job Title"placeholder="Enter Your Job Title" size='small' value={state.jobTitle} onChange={handleInputChange}  style={{ width: '300px', height: '60px' }} focused color='primary'/>
             </Grid>
             <Grid item xs={4}>
-            <TextField  id="Email" name="company_email" label="Email"placeholder="example@thac.com" size='small'value={state.company_email} onChange={handleInputChange}  style={{ width: '300px', height: '60px' }} focused color='primary'/>
+            <TextField disabled={state.match === true ? true:false} id="Email" name="company_email" label="Email"placeholder="example@thac.com" size='small'value={state.email} onChange={handleInputChange}  style={{ width: '300px', height: '60px' }} focused color='primary'/>
             </Grid>     
             <Grid item xs={4}>
             <TextField  id="LastName" name="LastName" label="Last Name"placeholder="Enter Your Last Name" size='small' value={state.LastName} onChange={handleInputChange}  style={{ width: '300px', height: '60px' }} focused color='primary'/>
@@ -161,10 +168,11 @@ fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}:${process.env.NEXT_PUBLIC_A
           </Grid>
           <Box p={2}/>
           <Divider/>
-          <Box p={1} sx={{color: `${themedata[0].ten}`, fontSize: 22, fontFamily: frontdata[0].font, fontWeight: '400', wordWrap: 'break-word'}}>Company Details</Box>
+          <Box p={1} sx={{color: `${themedata[0].four}`, fontSize: 22, fontFamily: frontdata[0].font, fontWeight: '400', wordWrap: 'break-word'}}>Company Details</Box>
+          <br></br>
           <Grid container  pl={5}  columnSpacing={{ xs: 1, sm: 2, md: 3 }} sx={{  width: '50%' }}>
             <Grid item xs={4} pb={2}>
-            <TextField id="CompanyName" name="CompanyName"  label="Company Name"placeholder="Enter Company Name" size='small'value={state.CompanyName} onChange={handleInputChange}  style={{ width: '300px', height: '60px' }} focused color='primary'/>
+            <TextField disabled={state.match === true ? true:false} id="CompanyName" name="CompanyName"  label="Company Name"placeholder="Enter Company Name" size='small'value={state.company_name_en} onChange={handleInputChange}  style={{ width: '300px', height: '60px' }} focused color='primary'/>
             </Grid>
             <Grid item xs={4}>
             <FormControl fullWidth>
@@ -311,7 +319,7 @@ fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}:${process.env.NEXT_PUBLIC_A
           <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
               <Button variant="outlined" onClick={handleClose} sx={{width:'30%'}}>Back</Button>
               <Box p={1}/>
-              <Button disabled={!state.Confirmed} variant="contained"sx={{width:'30%'}} onClick={handleSubmit} >Confirm</Button>
+              <Button disabled={!state.Confirmed} variant="contained"sx={{width:'30%'}} onClick={handleSubmit} >{state.loading?<Loading/>:buttontext[0].text}</Button>
             </Box>
           </Box>
             </Dialog>

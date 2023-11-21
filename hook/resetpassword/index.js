@@ -4,15 +4,14 @@ import React from 'react'
 
 export default function useHandleClick(props) {
     const [state, setState] = React.useContext(MyContext);
-  
+
     const handleClick =() =>{
-      if(state.decode_token.length === undefined){
+      if(state.decode_token.length === undefined||state.decode_token.length === 0){
           var myHeaders = new Headers();
           myHeaders.append("Content-Type", "application/json");
-          myHeaders.append("Authorization", `Bearer ${state.bearer_token?state.bearer_token:token}`);
-          
+
           var raw = JSON.stringify({
-            "email": state.decode_token.email,
+            "username": state.username?state.username:state.decode_token.email,
             "oldpassword": state.oldpassword,
             "newpassword": state.newpassword
           });
@@ -26,7 +25,7 @@ export default function useHandleClick(props) {
          .then(response => response.json())
          .then(result => {
             if(result.status==="OK"){
-              setState((prevData) => ({ ...prevData, alert: true,errordetail: result.message,status:true,btverify:true,url_alert:"/emailverification", }));
+              setState((prevData) => ({ ...prevData, alert: true,errordetail: result.message,status:true,url_alert:"/login", }));
             }else{
               setState((prevData) => ({ ...prevData, alert: true,errordetail: result.message,status:false }));
             }
