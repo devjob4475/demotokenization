@@ -23,7 +23,7 @@ export const MyProvider = (props) => {
   "selectedAmphoe":(""),"selectedTambon":(""),"firstName":(""),"LastName":(""),"jobTitle":(""),"company_email":(""),
   "MobileNumber":(""),"CompanyName":(""),"Branch":(""),"Address":(""),"Address2":(""),"Website":(""),"Country":(""),
   "Confirmed":false,"Email":(""),"OpenAlert":false,"selectedCountry":(""),"math":false,"password":(""),"role":(""),
-  "company_name_en":(""),"alluser":[],"login_text":[],"color":[]
+  "company_name_en":(""),"alluser":[],"login_text":[],"color":[],"email":"",
 });
   return (
     <>
@@ -35,8 +35,8 @@ export const MyProvider = (props) => {
       <SendEmail/>
       <Alert/>
       <AllUser/>
-      <LoginText/>
-      <Color/>
+      {/* <LoginText/>
+      <Color/> */}
       <Timeoutcallback/>
       <SetTimeout/>
       <UseefTOTP/>

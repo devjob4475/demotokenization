@@ -16,6 +16,7 @@ import { frontdata } from '@/data/frontdata';
 import FaceIcon from '@mui/icons-material/Face';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import CachedIcon from '@mui/icons-material/Cached';
+import Title from '@/components/title';
 function Index() {
   const router = useRouter();
   const [showPassword, setShowPassword] = React.useState(false);
@@ -40,7 +41,7 @@ function Index() {
       redirect: 'follow'
     };
 
-    fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_GET}:${process.env.NEXT_PUBLIC_API_PORT_LOGIN}/api/delete-user-by-id`, requestOptions)
+    fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_GET}/api/delete-user-by-id`, requestOptions)
       .then(response => response.json())
       .then(result => {
         if(result.status === "OK"){
@@ -78,7 +79,8 @@ function Index() {
 
 
   return (
-      <Box sx={{width:"100%",height:"100vh",background: `linear-gradient(108deg, ${themedata[0].primary} 0%, ${themedata[0].bgshadowwhite} 100%), linear-gradient(110deg, ${themedata[0].greenlight} -2.13%, ${themedata[0].greenblack} 102.03%), ${themedata[0].three}`,display:"flex",justifyContent:"center",flexDirection:"column",alignItems:"center",position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}>
+      <Box sx={{pt:25,pb:3,width:"100%",height:"auto",background: `linear-gradient(108deg, ${themedata[0].primary} 0%, ${themedata[0].bgshadowwhite} 100%), linear-gradient(110deg, ${themedata[0].greenlight} -2.13%, ${themedata[0].greenblack} 102.03%), ${themedata[0].three}`,display:"flex",justifyContent:"center",flexDirection:"column",alignItems:"center",position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}>
+       <Title namepage="Information" company="Partne Demo Tracthai"/>
       <Box sx={{ display: 'flex', flexDirection: 'column', padding: 3, borderRadius: 2, boxShadow: 3, background: '#fff', width: 'fit-content', }}>
         <Typography variant="h5" sx={{ mb: 2, fontWeight: 'bold', textAlign: 'center' }}>
           Information
