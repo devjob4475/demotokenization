@@ -29,7 +29,7 @@ function index() {
               router.push('/profile');
             }else{
               setState((prevData) => ({ ...prevData, alert: true,errordetail: result.message }));
-            }
+           }
           })
           .catch(error => console.log('error', error));
     }
