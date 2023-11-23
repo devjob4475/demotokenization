@@ -44,7 +44,7 @@ const router = useRouter();
       }else{
       router.push('/updateinformation');
       }
-  };
+  }
     return (
       <Box sx={{ background: `linear-gradient(${themedata[0].primary}, ${themedata[0].three})`, height: "100vh", width: '100%' }}>
         <Box p={3} sx={{

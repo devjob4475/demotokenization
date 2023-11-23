@@ -16,7 +16,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 function index() {
   const [state, setState] = useContext(MyContext);
-  console.log("🚀 ~ file: index.js:19 ~ index ~ state:", state)
   const router = useRouter();
   
   const handleChange = (event) => {
@@ -151,9 +150,7 @@ fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}/api/register`,requestOption
         <Box>
           
         <Box pt={2} pb={2} sx={{color: `${themedata[0].ten}`, fontSize: 15, fontFamily: frontdata[0].font, fontWeight: '800', wordWrap: 'break-word', textAlign: 'left'}}>Personal Details</Box>
-        
         </Box>
-        
         <Grid container spacing={0.5} sx={{flexDirection:'column', justifyContent: 'center', alignItems: 'center'}} > 
           <Grid item >
           <TextField  id="firstName" name="firstName" label="First Name"placeholder="Enter Your First Name" size='small' value={state.firstName} onChange={handleInputChange} style={{ width: '300px', height: '60px' }} focused color='primary'/>

@@ -5,13 +5,11 @@ import { themedata } from '../../../../data/themedata';
 import { frontdata } from '../../../../data/frontdata'; 
 import { MyContext } from '@/context';
 import Loading from '@/components/loading'
-import HandleConfirm from '@/hook/confirmotp'
+import HandleConfirm from '@/hook/confirmotp-forgot'
 import HandleResend from '@/hook/resendcode'
-import UseEFOTP from '@/services/useefotp'
 import { buttontext } from '@/data/buttondata';
-import Handletryanother from '@/hook/tryanother'
 import { OTPText } from '@/data/metadata';
-import { useRouter } from 'next/router';
+
 
 function Index() {
   const [state, setstate] = React.useContext(MyContext);

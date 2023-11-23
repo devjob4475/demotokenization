@@ -29,8 +29,8 @@ const [openAlert, setOpenAlert] = useState(false);
 
 const handleClickOpen = () => {
    if (state.firstName && state.LastName && state.jobTitle && state.email && state.MobileNumber && state.company_name_en ) {
-      setState((prevData) => ({ ...prevData, open: true }))
-      console.log("🚀 ~ file: index.js:33 ~ handleClickOpen ~ open:", open)
+      setState((prevData) => ({ ...prevData, openpc: true }))
+      
   } else {
     setOpenAlert(true);
   }
@@ -39,7 +39,7 @@ const handleCloseAlert = () => {
   setOpenAlert(false);
 }
 const handleClose = () => {
-  setState((prevData) => ({ ...prevData, open: false }));
+  setState((prevData) => ({ ...prevData, openpc: false }));
 }
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}/api1/countries`)
@@ -130,8 +130,8 @@ fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}/api/register`,requestOption
     router.push('/checkyouemail');
   }else
   {
-    console.log(state)
-    setState((prevData) => ({ ...prevData,open:false, alert:true,errordetail: result.message,status:false }))
+    
+    setState((prevData) => ({ ...prevData,openpc:false, alert:true,errordetail: result.message,status:false }))
   }
 })
 }
@@ -252,7 +252,7 @@ fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}/api/register`,requestOption
         <Box sx={{display: 'flex', justifyContent: 'center', mb:3}}>
         <Button variant="contained" onClick={handleClickOpen} sx={{color:'white', textTransform:'capitalize', width: '200px', height: 'auto'}}>Next</Button>
         <Box>
-          <Dialog fullScreen open={state.open} onClose={handleClose} TransitionComponent={Transition}>
+          <Dialog fullScreen open={state.openpc} onClose={handleClose} TransitionComponent={Transition}>
             <Box p={2}>
                    <Box sx={{ color: `${themedata[0].ten}`, fontSize: 25, fontFamily: frontdata[0].font, fontWeight: '400', wordWrap: 'break-word'}}>User Registration</Box>
           <Box pb={3} sx={{color:  `${themedata[0].four}`, fontSize: 15, fontFamily: frontdata[0].font, fontWeight: '0', textAlign: 'left'}}>
