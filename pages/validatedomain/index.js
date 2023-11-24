@@ -15,7 +15,6 @@ function Index() {
   const router = useRouter(); 
   const handleEmailChange = (event) => {
     setState((prevData) => ({ ...prevData, email: event.target.value }));
-    
   };
   const handleButtonClick = async () => {
     setState((prevData) => ({ ...prevData, loading:  true}));
@@ -25,7 +24,7 @@ function Index() {
       "username": state.email
     });
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}/api/validate-domain`, {
+      const response = await fetch("http://192.168.5.44:8011/api/validate-domain", {
         method: 'POST',
         headers: {"Content-Type": "application/json" },
         body: raw
@@ -69,5 +68,4 @@ function Index() {
     </Box>
   );
 }
-
 export default Index;

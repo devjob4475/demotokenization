@@ -52,7 +52,6 @@ function useHandleClick() {
        setState((prevData) => ({ ...prevData, alert: true,errordetail:"Please fill in both Email and Password fields." }));
      }
   }
-
   return handleClick;
 }
 

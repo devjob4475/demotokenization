@@ -7,7 +7,6 @@ import { Router, useRouter } from 'next/router';
 import { buttontext } from '@/data/buttondata';
 import Loading from '@/components/loading'
 
-
 function Index() {
   const [clicked, setClicked] = useState(false);
   const [clicked2, setClicked2] = useState(false);
@@ -20,12 +19,10 @@ const handleCompanyChange = (event) => {
 const handleClick = () => {
   setClicked(prevClicked => {
     setClicked2(false); 
-    return !prevClicked; 
-    
+    return !prevClicked;  
   });
   setChecked(false);
   setSelectedCompany(undefined)
-  
 };
 const handleClick2 = () => {
   setClicked2(prevClicked2 => {

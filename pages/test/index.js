@@ -15,11 +15,13 @@ import { frontdata } from '@/data/frontdata';
 import FaceIcon from '@mui/icons-material/Face';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import Title from '@/components/title';
+import { useCookies } from 'react-cookie';
 function Index() {
   const router = useRouter();
   const [showPassword, setShowPassword] = React.useState(false);
   const [state, setState] = useContext(MyContext);
-
+  const [cookies, setCookie, removeCookie] = useCookies(['bearer_token']);
+  setCookie('bearer_token',  { path: '/', expires: expirationDate });
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
@@ -34,7 +36,8 @@ function Index() {
       headers: myHeaders,
       body: raw,
       redirect: 'follow'
-    };
+    }
+
     fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_GET}/api/delete-user-by-id`, requestOptions)
       .then(response => response.json())
       .then(result => {
@@ -52,7 +55,8 @@ function Index() {
     }).catch(err => {
       console.log('Something went wrong', err);
     })
-  };
+  }
+
   const userInfo = {
     Email: { value: showPassword ? state.decode_token.UsernameOriginal : state.decode_token.username, icon: <EmailIcon /> },
     Name: { value: showPassword ? state.decode_token.firstname_original + ' ' + state.decode_token.surname_origianl : state.decode_token.firstname_token + state.decode_token.surname_token, icon: <AccountCircleIcon /> },

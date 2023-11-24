@@ -22,10 +22,8 @@ function index() {
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 200);
-
     return () => clearTimeout(timer);
   }, []);
-
   if (isLoading) {
     return (
       <>
