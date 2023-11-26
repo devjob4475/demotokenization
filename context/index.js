@@ -1,8 +1,8 @@
 import React, { createContext } from 'react';
 import Provinces from '@/services/provinces';
-import Amphures from '@/services/provinces';
-import Tambons from '@/services/provinces';
-import Zipcodes from '@/services/provinces';
+// import Amphures from '@/services/provinces';
+// import Tambons from '@/services/provinces';
+// import Zipcodes from '@/services/provinces';
 import SendEmail from '@/services/sendemail'
 import Alert from '@/components/alert'
 import Timeoutcallback from '@/services/timeoutcallback';
@@ -23,15 +23,15 @@ export const MyProvider = (props) => {
   "selectedAmphoe":(""),"selectedTambon":(""),"firstName":(""),"LastName":(""),"jobTitle":(""),"company_email":(""),
   "MobileNumber":(""),"CompanyName":(""),"Branch":(""),"Address":(""),"Address2":(""),"Website":(""),"Country":(""),
   "Confirmed":false,"Email":(""),"OpenAlert":false,"selectedCountry":(""),"math":false,"password":(""),"role":(""),
-  "company_name_en":(""),"alluser":[],"login_text":[],"color":[],"email":"","openpc":false
+  "company_name_en":(""),"alluser":[],"login_text":[],"color":[],"email":"","openpc":false,"varidate":[],"tambons":[]
 });
   return (
     <>
        <MyContext.Provider value={[state, setState]}>
       <Provinces/>
-      <Amphures/>
+      {/* <Amphures/>
       <Tambons/>
-      <Zipcodes/>
+      <Zipcodes/> */}
       <SendEmail/>
       <Alert/>
       <AllUser/>

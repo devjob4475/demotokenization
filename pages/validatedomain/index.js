@@ -1,4 +1,4 @@
-import { Box, Button, TextField } from '@mui/material';
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@mui/material';
 import React, { useContext, useState } from 'react';
 import logocmpany from '/assets/images/image 8.png'; 
 import Image from 'next/image';
@@ -12,10 +12,14 @@ import Loading from '@/components/loading'
 
 function Index() {
   const [state, setState] = useContext(MyContext);
+  const [openAlert, setOpenAlert] = useState(false);
   const router = useRouter(); 
   const handleEmailChange = (event) => {
     setState((prevData) => ({ ...prevData, email: event.target.value }));
-  };
+  }
+  const handleCloseAlert = () => {
+    setOpenAlert(false);
+  }
   const handleButtonClick = async () => {
     setState((prevData) => ({ ...prevData, loading:  true}));
     var myHeaders = new Headers();
@@ -24,7 +28,7 @@ function Index() {
       "username": state.email
     });
     try {
-      const response = await fetch("http://192.168.5.44:8011/api/validate-domain", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}/api/validate-domain`, {
         method: 'POST',
         headers: {"Content-Type": "application/json" },
         body: raw
@@ -32,29 +36,44 @@ function Index() {
       if (response.status === 200) {
         const result = await response.json();
         setState(prevState => ({
-          ...prevState,
-          company_name_en: result.company_name_en_original,
-          firstname_en: result.firstname_en,
-          surname_en: result.surname_en,
-          username:result.username,
-          password:result.password,
-          match:result.match,
-          loading : false,
+          ...prevState,varidate:result,
+           loading : false,
         }),console.log(state));
         if(result.match === true){
           router.push('/companyselection'); 
         }else
         {
-          router.push('/updateinformation'); 
+          setState((prevData) => ({ ...prevData, alert: true }));
+          setState((prevData) => ({ ...prevData, errordetail:   result.message }));
+          var formdata = new FormData();
+            formdata.append("to", state.email);
+            formdata.append("subject", "Registration");
+            formdata.append("fromEmail", "worapon@tracthai.com");
+            formdata.append("body", "Please click the link provided below to proceed.");
+            formdata.append("body1", "MODULE: DEMO_TOKENIZATION");
+            formdata.append("body2", "ADMIN: TRAC-THAI");
+            formdata.append("bodylink", "http://localhost:3000/updateinformation");
+            formdata.append("linkname", "Registration Link");
+            var requestOptions = {
+              method: 'POST',
+              body: formdata,
+              redirect: 'follow'
+            };
+            fetch("https://partnerdemo.tracthai.com/api4/send-email", requestOptions)
+              .then(response => response.text())
+              .then(result => console.log(result))
+              .catch(error => console.log('error', error));
         }
       } else {
+        setState((prevData) => ({ ...prevData, alert: true }));
         const result = await response.json();
         console.error('Error with status code:', response.status, result);
+        setState((prevData) => ({ ...prevData, errordetail:   result.message }));
       }
     } catch (error) {
       console.error('Error posting data:', error);
     }
-  };
+  }
   return (
     <Box sx={{background: `linear-gradient(${themedata[0].primary}, ${themedata[0].three})`, height: "100vh", width: '100%'}}>
       <Title namepage="Enter Company E-mail" company="Partne Demo Tracthai"/>

@@ -16,6 +16,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 function index() {
   const [state, setState] = useContext(MyContext);
+
   const router = useRouter();
   
   const handleChange = (event) => {
@@ -102,7 +103,6 @@ const handleClose = () => {
     setState(prev => ({ ...prev, loading: true }));
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-
     var raw = JSON.stringify({
     username: state.email,
     firstname: "วรพล",
@@ -148,7 +148,6 @@ fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}/api/register`,requestOption
         <Box sx={{width: '100%',  border: `1px ${themedata[0].four} solid`}}>  
         </Box>
         <Box>
-          
         <Box pt={2} pb={2} sx={{color: `${themedata[0].ten}`, fontSize: 15, fontFamily: frontdata[0].font, fontWeight: '800', wordWrap: 'break-word', textAlign: 'left'}}>Personal Details</Box>
         </Box>
         <Grid container spacing={0.5} sx={{flexDirection:'column', justifyContent: 'center', alignItems: 'center'}} > 

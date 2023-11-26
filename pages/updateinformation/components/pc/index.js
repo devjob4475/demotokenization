@@ -18,6 +18,12 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 function index() {
   const [state, setState] = useContext(MyContext);
   const router = useRouter();
+  const [age, setAge] = React.useState('');
+  
+
+  const handleChange1 = (event) => {
+    setAge(event.target.value);
+  };
   
   const handleChange = (event) => {
     setState(prevState => ({ ...prevState, role: event.target.value }));
@@ -28,7 +34,7 @@ function index() {
 const [openAlert, setOpenAlert] = useState(false);
 
 const handleClickOpen = () => {
-   if (state.firstName && state.LastName && state.jobTitle && state.email && state.MobileNumber && state.company_name_en ) {
+   if (state.firstName && state.LastName && state.jobTitle && state.email && state.MobileNumber && state.CompanyName ) {
       setState((prevData) => ({ ...prevData, openpc: true }))
       
   } else {
@@ -102,19 +108,27 @@ const handleClose = () => {
     setState(prev => ({ ...prev, loading: true }));
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-
     var raw = JSON.stringify({
-    username: state.email,
-    firstname: "วรพล",
-    surname: "อัศวนิก",
-    firstname_en: state.firstName,
-    surname_en: state.LastName,
-    mobile_phone: state.MobileNumber,
-    personal_email: "woraponasvn36@gmail.com",
-    company_name: "เดอะ รีโคฟเวอรี่ แอดไวเซอร์ จำกัด",
-    company_name_en: state.company_name_en,
-    credit_card: "1234123412341238",
-    role: state.role,
+      username: state.email,
+      firstname: state.firstName,
+      surname: state.LastName ,
+      firstname_en: state.firstName,
+      surname_en: state.LastName ,
+      mobile_phone: state.MobileNumber,
+      personal_email: state.email,
+      company_name: state.varidate.company_name_en_original,
+      company_name_en: state.varidate.company_name_en_original,
+      credit_card: "1234123412341238",
+      country: state.varidate.country,
+      province: state.varidate.province,
+      amphoe: state.varidate.amphoe,
+      tambon: state.varidate.tambon,
+      zipcode: state.varidate.zipcodezipcode,
+      website: state.varidate.website,
+      address1: state.varidate.address1,
+      address2: state.varidate.address2,
+      role: state.role,
+      title: age
 })
 var requestOptions = {
   method: 'POST',
@@ -130,7 +144,6 @@ fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}/api/register`,requestOption
     router.push('/checkyouemail');
   }else
   {
-    
     setState((prevData) => ({ ...prevData,openpc:false, alert:true,errordetail: result.message,status:false }))
   }
 })
@@ -149,7 +162,14 @@ fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}/api/register`,requestOption
           <br></br>
           <Grid item  container  pl={5}  columnSpacing={{ xs: 1, sm: 2, md: 3 }} sx={{  width: '50%' }}>
             <Grid item xs={4} pb={2}>
-            <TextField  id="firstName" name="firstName" label="First Name"placeholder="Enter Your First Name" size='small' value={state.firstName} onChange={handleInputChange} style={{ width: '300px', height: '60px' }} focused color='primary'/>
+            <FormControl sx={{ width: '80px', height: '40px', pr: 0.5 }}>
+              <InputLabel >title</InputLabel>
+              <Select size='small' value={age} label="Sex" onChange={handleChange1}>
+                <MenuItem value={"Mr."}>Mr.</MenuItem>
+                <MenuItem value={"Ms."}>Ms.</MenuItem>
+              </Select>
+            </FormControl>
+            <TextField  id="firstName" name="firstName" label="First Name"placeholder="Enter Your First Name" size='small' value={state.firstName} onChange={handleInputChange} sx={{ width: '215px', height: '60px' }} focused color='primary'/>
             </Grid>
             <Grid item xs={4}>
             <TextField  id="jobTitle" name="jobTitle" label="Job Title"placeholder="Enter Your Job Title" size='small' value={state.jobTitle} onChange={handleInputChange}  style={{ width: '300px', height: '60px' }} focused color='primary'/>
@@ -170,7 +190,7 @@ fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}/api/register`,requestOption
           <br></br>
           <Grid container  pl={5}  columnSpacing={{ xs: 1, sm: 2, md: 3 }} sx={{  width: '50%' }}>
             <Grid item xs={4} pb={2}>
-            <TextField disabled={state.match === true ? true:false} id="CompanyName" name="CompanyName"  label="Company Name"placeholder="Enter Company Name" size='small'value={state.company_name_en} onChange={handleInputChange}  style={{ width: '300px', height: '60px' }} focused color='primary'/>
+            <TextField  id="CompanyName" name="CompanyName"  label="Company Name"placeholder="Enter Company Name" size='small'value={state.CompanyName} onChange={handleInputChange}  style={{ width: '300px', height: '60px' }} focused color='primary'/>
             </Grid>
             <Grid item xs={4}>
             <FormControl fullWidth>
@@ -261,7 +281,8 @@ fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}/api/register`,requestOption
           <Box p={1} sx={{color: `${themedata[0].ten}`, fontSize: 22, fontFamily: frontdata[0].font, fontWeight: '400', wordWrap: 'break-word'}}>Personal Details</Box>
           <Grid item  container  pl={15}  columnSpacing={{ xs: 1, sm: 2, md: 3 }} sx={{  width: '50%' }}>
             <Grid item xs={4} pb={2}>
-              <TextField disabled id="outlined-disabled"label="Disabled"value={state.firstName} size='small' sx={{ width: '70%' }}  />
+            <TextField disabled id="outlined-disabled"label="Disabled"value={age} size='small' sx={{ width: '15%' }}  />
+              <TextField disabled id="outlined-disabled"label="Disabled"value={state.firstName} size='small' sx={{ width: '55%' }}  />
             </Grid>
             <Grid item xs={4}>
               <TextField disabled id="outlined-disabled"label="Disabled" value={state.jobTitle} size='small' sx={{ width: '70%' }} />
@@ -281,7 +302,7 @@ fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}/api/register`,requestOption
           <Box p={3} sx={{color: `${themedata[0].ten}`, fontSize: 22, fontFamily: frontdata[0].font, fontWeight: '400', wordWrap: 'break-word'}}>Company Details</Box>
           <Grid item  container  pl={15}  columnSpacing={{ xs: 1, sm: 2, md: 3 }} sx={{  width: '50%' }}>
             <Grid item  xs={4} pb={2}>
-              <TextField disabled id="outlined-disabled"label="Disabled"value={state.company_name_en} size='small' sx={{ width: '70%' }} />
+              <TextField disabled id="outlined-disabled"label="Disabled"value={state.CompanyName} size='small' sx={{ width: '70%' }} />
             </Grid>
             <Grid item xs={4}>
               <TextField disabled id="outlined-disabled"label="Disabled"value={state.selectedCountry} size='small' sx={{ width: '70%' }} />
@@ -290,7 +311,7 @@ fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}/api/register`,requestOption
               <TextField disabled id="outlined-disabled"label="Disabled"value={state.zipcode} size='small' sx={{ width: '70%' }} />
             </Grid>     
             <Grid item  xs={4}pb={2}>
-              <TextField disabled id="outlined-disabled"label="Disabled" value={state.Branch}  size='small' sx={{ width: '70%' }} />
+              <TextField disabled id="outlined-disabled"label="Disabled" value={state.role}  size='small' sx={{ width: '70%' }} />
             </Grid> 
             <Grid item xs={4}>
               <TextField disabled id="outlined-disabled"label="Disabled"value={state.selectedProvince} size='small' sx={{ width: '70%' }} />
