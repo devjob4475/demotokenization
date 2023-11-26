@@ -163,7 +163,8 @@ fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}/api/register`,requestOption
               <InputLabel >title</InputLabel>
               <Select size='small' value={age} label="Sex" onChange={handleChange1}>
                 <MenuItem value={"Mr"}>Mr.</MenuItem>
-                <MenuItem value={"Ms"}>Ms.</MenuItem>
+                <MenuItem value={"Mrs"}>Mrs.</MenuItem>
+                <MenuItem value={"Miss"}>Miss.</MenuItem>
               </Select>
             </FormControl>
             <TextField  id="firstName" name="firstName" label="First Name"placeholder="Enter Your First Name" size='small' value={state.firstName} onChange={handleInputChange} sx={{ width: '215px', height: '60px' }} focused color='primary'/>
