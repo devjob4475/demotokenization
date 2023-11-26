@@ -14,7 +14,7 @@ function Index() {
   const [state, setState] = useContext(MyContext);
   return (
       <Box sx={{background:`linear-gradient(${themedata[0].primary}, ${themedata[0].three})`,height:"100vh",width:'100%'}}>
-        <Title namepage="Updateinformation" company="Partne Demo Tracthai"/>
+        <Title namepage="Updateinformation" company="Partner Demo Tracthai"/>
         <Box p={4} sx={{display:'flex',flexDirection:'column', background: 'white',
       borderRadius: 10,justifyContent:'center',alignItems:'center',position:'absolute',top:'50%',left:'50%',transform: 'translate(-50%, -50%)'}}> 
           <Box sx={{ color: `${themedata[0].ten}`, fontSize: 25, fontFamily: frontdata[0].font, fontWeight: '800', 

@@ -102,7 +102,7 @@ fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}/api/register`,requestOption
 }
   return (
     <Box  sx={{background:`linear-gradient(${themedata[0].primary}, ${themedata[0].three})`,width:'100%',height:"130vh"}}>
-      <Title namepage="Registration" company="Partne Demo Tracthai"/>
+      
       <Box pt={3} sx={{display: "flex", alignItems: "center", justifyContent: "center" }}> 
       <Box p={1} sx={{ flexDirection:'column', background: 'white', width: '80%', height: '750px', borderRadius: 5, display: "flex", alignItems: "center", justifyContent: "center" }}> 
       <Box p={3}>
