@@ -23,6 +23,8 @@ import Title from '@/components/title';
 import Image from 'next/image';
 import { border, styled } from '@mui/system';
 import CachedIcon from '@mui/icons-material/Cached';
+import { useCookies } from 'react-cookie';
+
 const IOSSwitch = styled((props) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
 ))(({ theme }) => ({
@@ -111,7 +113,7 @@ const IOSSwitchAccountDisable = styled((props) => (
       transform: 'translateX(29px)',
       color: '#fff',
       '& + .MuiSwitch-track': {
-        backgroundColor: theme.palette.mode === 'dark' ? '#28B30E' : '#E9E9EA',
+        backgroundColor: theme.palette.mode === 'dark' ? '#fff' : '#E9E9EA',
         opacity: 1,
         border: "2px solid #E9E9EA",
       },
@@ -127,13 +129,12 @@ const IOSSwitchAccountDisable = styled((props) => (
     borderRadius: 36 / 2,
     backgroundColor: theme.palette.mode === 'light' ? '#E9E9EA' : '#39393D',
     opacity: 1,
-    border: "2px solid #B3B5B4",
+    border: "2px solid #fff",
     transition: theme.transitions.create(['background-color'], {
       duration: 500,
     }),
   },
 }));
-
 
 function Index() {
   const router = useRouter();
@@ -144,9 +145,24 @@ function Index() {
   const [info,setInfo] = React.useState(0);
   const [state, setState] = useContext(MyContext);
   const [deleteStates, setDeleteStates] = useState({});
+  const [cookies] = useCookies(['bearer_token']);
 
   const [Localalluser, setLocalAllUser] = React.useState([]);
-  const [personal, setPersonal] = React.useState([]);
+  const [personal, setPersonal] = React.useState({});
+
+  useEffect(() => {
+    const handleStorageChange = (event) => {
+      if (event.key === 'alluser') {
+        setLocalAllUser(JSON.parse(event.newValue));
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, []); 
 
 useEffect(() => {
   const items = JSON.parse(localStorage.getItem('alluser'));
@@ -154,6 +170,8 @@ useEffect(() => {
     setLocalAllUser(items);
   }
 }, []);
+
+
 
 useEffect(() => {
   const personaldata = JSON.parse(localStorage.getItem('decode_token'));
@@ -197,11 +215,9 @@ useEffect(() => {
       .then(response => response.json())
       .then(result => {
         if(result.status === "OK"){
-          // const updatedAllUser = Localalluser.filter(user => user.ID !== userId);
-          // localStorage.setItem("alluser", JSON.stringify(updatedAllUser));
-
-          // setState(prevState => ({...prevState,btalluser:true,alluser: prevState.alluser.filter(user => user.ID !== userId)}))
-          setState((prevData) => ({ ...prevData, btalluser: true,btdelete:true}));
+          const updatedUsers = Localalluser.filter(user => user.ID !== userId);
+          setLocalAllUser(updatedUsers);
+          localStorage.setItem('alluser', JSON.stringify(updatedUsers));
         }else{
           setState((prevData) => ({ ...prevData, alert: true,errordetail: result.message }));
         }
@@ -222,15 +238,34 @@ useEffect(() => {
     Role: { value: personal?personal.role : state.decode_token.role, icon: <Image style={{width:"20px",height:"auto"}} src={Role} alt='email'/> },
     Password: { value: personal? personal.password_hash :state.decode_token.password_hash, icon: <Image style={{width:"19px",height:"auto"}} src={Password} alt='email'/> },
   };
-  // const AllUser = state.decode_token.role === "admin" && {
-  //   User: state.alluser.map((user) => ({
-  //     id: user.ID,
-  //     value: showPassword? user.UsernameOriginal:user.Username,
-  //     Name:  showPassword ? user.FirstnameOriginal + ' ' + user.SurnameOriginal : user.Firstname + user.Surname,
-  //     Role:  user.Role,
-  //     icon: <Image style={{width:"20px",height:"auto"}} src={Account} alt='email'/>,
-  //   })),
-  // }; 
+  const handleReload = () => {
+    fetchAndUpdateData();
+  };
+
+  const fetchAndUpdateData = () => {
+    setState((prevData) => ({ ...prevData, btreload: true }));
+
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", `Bearer ${cookies ? cookies.bearer_token : state.bearer_token}`);
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow'
+    };
+
+    fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_GET}/api/users`, requestOptions)
+      .then(response => response.json())
+      .then(result => {
+        if (result) {
+          localStorage.setItem("alluser", JSON.stringify(result));
+          setLocalAllUser(result); // Update state with the new data
+          setState((prevData) => ({ ...prevData, btreload: false }));
+        } else {
+          console.log('Error:', result.message);
+        }
+      })
+      .catch(error => console.log('error', error));
+  };
 
  
   return (
@@ -290,7 +325,7 @@ useEffect(() => {
               ):(
                 <>
               <Box sx={{display:"flex",fontFamily: frontdata[0].font, fontWeight: '800',fontSize:"20px"}}>All User <Box sx={{display:"flex",alignItems:"center"}}><CachedIcon onClick={()=>{
-                setState((prevData) => ({ ...prevData,btalluser:true,btreload:true }));
+                handleReload()
               }} sx={{cursor:"pointer",fontSize:"20px",animation: state.btreload ? "rotate 2s infinite linear" : "none",}}/></Box></Box>
               <Divider sx={{mt:3,mb:3}}/>
               <table>

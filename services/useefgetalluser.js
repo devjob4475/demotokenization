@@ -23,7 +23,7 @@ function useEfotp() {
           if(result){
             localStorage.setItem("alluser", JSON.stringify(result));
             setState((prevData) => ({ ...prevData, alluser: result }));
-            if(state.btdelete||state.btreload){
+            if(state.btreload){
               window.location.reload()
             }
           }else{
