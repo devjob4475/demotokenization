@@ -10,18 +10,18 @@ import Loading from '@/components/loading'
 import { buttontext } from '@/data/buttondata';
 import {MyContext} from 'context'
 function Index() {
-  const [otp, setOtp] = useState('');
+  
   const [state, setState] = useContext(MyContext);
   return (
       <Box sx={{background:`linear-gradient(${themedata[0].primary}, ${themedata[0].three})`,height:"100vh",width:'100%'}}>
-        <Title namepage="Updateinformation" company="Partne Demo Tracthai"/>
+        <Title namepage="Updateinformation" company="Partner Demo Tracthai"/>
         <Box p={4} sx={{display:'flex',flexDirection:'column', background: 'white',
       borderRadius: 10,justifyContent:'center',alignItems:'center',position:'absolute',top:'50%',left:'50%',transform: 'translate(-50%, -50%)'}}> 
           <Box sx={{ color: `${themedata[0].ten}`, fontSize: 25, fontFamily: frontdata[0].font, fontWeight: '800', 
           wordWrap: 'break-word',}}>Check your Email</Box>
           <Box pb={3} sx={{color: `${themedata[0].four}`, fontSize: 15, fontFamily: frontdata[0].font, fontWeight: '0',textAlign:'center' 
           }}>We have sent password to your Email<br></br> 
-          ex**e@tracmail.com</Box>
+          {state.email}</Box>
           <Box pb={3} ><Image alt="Iconview" src={logocmpany} width={200} height={'auto'}></Image></Box>       
           <Link href="/login" >
           <Button  variant='contained'  style={{ fontSize: '12px', padding: '6px 12px',backgroundColor:`${themedata[0].primary}`,

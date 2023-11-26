@@ -14,9 +14,9 @@ export const ResetPassText = [
     {
         "title":"Reset Password",
         "description":"Please type something you'll remember",
-        "InputOldPass":"old password",
-        "InputNewPass":"new password",
-        "InputConPass":"repeat password",
+        "InputOldPass":"Old password",
+        "InputNewPass":"New password",
+        "InputConPass":"Confirm new password",
         "buttontext":"Reset Password",
     }
 ]

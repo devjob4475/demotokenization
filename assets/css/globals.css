@@ -86,3 +86,56 @@ body{
 		content: ''
 	}
 }
+
+table {
+  width: 100%;
+  margin-bottom: 20px;
+  table-layout: fixed; /* เพิ่มบรรทัดนี้ */
+
+}
+
+th {
+  text-align: center;
+  width: 150px;
+  min-width: 150px; /* เพิ่มบรรทัดนี้ */
+}
+
+td {
+  text-align: center;
+  min-width: 150px; /* เพิ่มบรรทัดนี้ */
+  word-break: break-word; /* เพิ่มบรรทัดนี้ */
+}
+
+.geeks {
+  border-right:hidden;
+}
+.gfg {
+  border-collapse:separate;
+  border-spacing:0 2px;
+  border: 1px solid #171717;
+  border-radius: 11px;
+  background: #ffffff;
+}
+h1 {
+  color:green;
+}
+ 
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes zoom {
+  0% {
+    transform: scale(0.5);
+  }
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.5);
+  }
+}

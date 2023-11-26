@@ -40,7 +40,7 @@ function index() {
         <Box width="100%" display="flex" justifyContent="space-between">
           <FormControlLabel control={<Checkbox onClick={()=>{setstate((prevData) => ({ ...prevData, remember: !state.remember }));}}/>}
           label={LoginText[0].remember}sx={{'& .MuiSvgIcon-root': { fontSize: 16 },' & .MuiTypography-root': { fontSize: "12px", fontFamily: frontdata[0].font } }}/>
-          <Button variant="text"sx={{color:`${themedata[0].secondary}`,textTransform:'capitalize', fontFamily: frontdata[0].font,fontSize: "12px",}} >{LoginText[0].forgot}</Button>
+          <Button onClick={()=>{router.push('/forgot-password')}} variant="text"sx={{color:`${themedata[0].secondary}`,textTransform:'capitalize', fontFamily: frontdata[0].font,fontSize: "12px",}} >{LoginText[0].forgot}</Button>
         </Box>
         {/* //!remember and forgot */}
 

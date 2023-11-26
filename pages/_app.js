@@ -4,6 +4,7 @@ import { Box, ThemeProvider } from '@mui/material'
 import { MyProvider } from '@/context';
 import localFont from 'next/font/local';
 
+
 const cooper = localFont({
   src: [
     {

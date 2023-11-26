@@ -32,11 +32,13 @@ function useHandleClick() {
         .then(result => {
           if(result.status === "OK"){
             const decodedToken = JSON.parse(atob(result.access_token.split('.')[1]));
+            localStorage.setItem("decode_token", JSON.stringify(decodedToken));
+
             const fakeexp = 1699498437;
             // const expirationDate = new Date(fakeexp * 1000); //
             const expirationDate = new Date(decodedToken.exp * 1000); //
             setCookie('bearer_token', result.access_token, { path: '/', expires: expirationDate });
-            setState((prevData) => ({ ...prevData, decode_token: decodedToken, bearer_token: result.access_token,loading:false}));
+            setState((prevData) => ({ ...prevData, btalluser:true,decode_token: decodedToken, bearer_token: result.access_token,loading:false}));
             if(decodedToken.requires_action==="change_password"){
               router.push('/resetpassword');
             }else{
@@ -52,7 +54,6 @@ function useHandleClick() {
        setState((prevData) => ({ ...prevData, alert: true,errordetail:"Please fill in both Email and Password fields." }));
      }
   }
-
   return handleClick;
 }
 
