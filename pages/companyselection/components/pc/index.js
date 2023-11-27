@@ -37,11 +37,9 @@ const router = useRouter();
           textAlign: 'left'}}>Please Take A Look At The Companies Listed Below<br/> And Tell Us Whether You Are Working At Any Of Them</Box>
           <Box sx={{display:'flex',flexDirection:'column',justifyContent:'center'}}>
           <Box sx={{ minWidth: 120,pb:2  }}>
-          <FormControl fullWidth style={{ width: '300px' }}>
+          <FormControl fullWidth style={{ width: '300px',maxWidth:'300px' }}>
           <InputLabel id="company-select-label">Company</InputLabel>
           <Select value={company} label="Company" onChange={handleChange}>
-            <MenuItem value="">
-            </MenuItem>
             <MenuItem value={"company1"}>{state.varidate.company_name_en_original}</MenuItem>
             <MenuItem value={'No!'}>No!</MenuItem>
           </Select>

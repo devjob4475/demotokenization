@@ -17,9 +17,9 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 function index() {
   const [state, setState] = useContext(MyContext);
   const router = useRouter();
-  const [age, setAge] = React.useState('');
+  const [title, settitle] = React.useState('');
   const handleChange1 = (event) => {
-    setAge(event.target.value);
+    settitle(event.target.value);
   };
   const handleChange = (event) => {
     setState(prevState => ({ ...prevState, role: event.target.value }));
@@ -79,7 +79,7 @@ var raw = JSON.stringify({
   address1: state.varidate.address1,
   address2: state.varidate.address2,
   role: state.role,
-  title: age
+  title: title
 });
 
 var requestOptions = {
@@ -96,7 +96,7 @@ fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}/api/register`,requestOption
     router.push('/checkyouemail');
   }else
   {
-    setState((prevData) => ({ ...prevData,openpc:false, alert:true,errordetail: result.message,status:false }))
+    setState((prevData) => ({ ...prevData,openpc:false, alert:true,errordetail: result.messtitle,status:false }))
   }
 })
 }
@@ -141,7 +141,7 @@ fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}/api/register`,requestOption
         <Box pt={1} sx={{fontFamily: frontdata[0].font,color: '#7F8391'}}>{state.varidate.amphoe}</Box></Box>
         <Box p={2}>
         <div style={{ fontSize: 15, fontFamily: frontdata[0].font, fontWeight: '800', wordWrap: 'break-word'}}>Sub-District</div>
-          <Box pt={1} sx={{fontFamily: frontdata[0].font,color: '#7F8391'}}>{state.varidate.tambon}</Box></Box>
+        <Box pt={1} sx={{fontFamily: frontdata[0].font,color: '#7F8391'}}>{state.varidate.tambon}</Box></Box>
         </Grid>
         <Grid item xs={12} sm={3}>
           <Box p={2}>
@@ -161,7 +161,7 @@ fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}/api/register`,requestOption
             <Grid item xs={4} pb={2}>
             <FormControl sx={{ width: '80px', height: '40px', pr: 0.5 }}>
               <InputLabel >title</InputLabel>
-              <Select size='small' value={age} label="Sex" onChange={handleChange1}>
+              <Select size='small' value={title} label="Sex" onChange={handleChange1}>
                 <MenuItem value={"Mr"}>Mr.</MenuItem>
                 <MenuItem value={"Mrs"}>Mrs.</MenuItem>
                 <MenuItem value={"Miss"}>Miss.</MenuItem>

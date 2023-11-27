@@ -20,12 +20,13 @@ function Index() {
           <Box sx={{ color: `${themedata[0].ten}`, fontSize: 25, fontFamily: frontdata[0].font, fontWeight: '800', 
           wordWrap: 'break-word',}}>Check your Email</Box>
           <Box pb={3} sx={{color: `${themedata[0].four}`, fontSize: 15, fontFamily: frontdata[0].font, fontWeight: '0',textAlign:'center' 
-          }}>We have sent password to your Email<br></br> 
-          {state.email}</Box>
+          }}>Please click on the confirmation link from the email sent to <strong>{state.email}</strong><Box></Box>
+          Afterward, proceed to reset your password.
+          </Box>
           <Box pb={3} ><Image alt="Iconview" src={logocmpany} width={200} height={'auto'}></Image></Box>       
           <Link href="/login" >
           <Button  variant='contained'  style={{ fontSize: '12px', padding: '6px 12px',backgroundColor:`${themedata[0].primary}`,
-          width: '300px', height: 'auto',textTransform:'capitalize', fontFamily: frontdata[0].font,color:`${themedata[0].three}` }}>{state.loading?<Loading/>:buttontext[0].text}</Button>
+          width: '300px', height: 'auto',textTransform:'capitalize', fontFamily: frontdata[0].font,color:`${themedata[0].three}` }}>{state.loading?<Loading/>:buttontext[0].close}</Button>
           </Link>
         <Box p={2}>
       <label style={{color:`${themedata[0].four}`,fontSize: 15, fontFamily: frontdata[0].font}}>Didn’t receive password?</label>

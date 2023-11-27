@@ -52,7 +52,7 @@ function Index() {
             formdata.append("body", "Please click the link provided below to proceed.");
             formdata.append("body1", "MODULE: DEMO_TOKENIZATION");
             formdata.append("body2", "ADMIN: TRAC-THAI");
-            formdata.append("bodylink", "http://localhost:3000/updateinformation");
+            formdata.append("bodylink", `https://partnerdemo.tracthai.com/updateinformation/?email=${state.email}`);
             formdata.append("linkname", "Registration Link");
             var requestOptions = {
               method: 'POST',

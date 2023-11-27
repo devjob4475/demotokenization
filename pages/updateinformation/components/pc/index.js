@@ -18,11 +18,10 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 function index() {
   const [state, setState] = useContext(MyContext);
   const router = useRouter();
-  const [age, setAge] = React.useState('');
-  
+  const [title, settitle] = React.useState('');
 
   const handleChange1 = (event) => {
-    setAge(event.target.value);
+    settitle(event.target.value);
   };
   
   const handleChange = (event) => {
@@ -47,21 +46,7 @@ const handleCloseAlert = () => {
 const handleClose = () => {
   setState((prevData) => ({ ...prevData, openpc: false }));
 }
-  useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}/api1/countries`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Failed to load countries');
-        }
-        return response.json();
-      })
-      .then(result => {
-        setState(prevState => ({ ...prevState, countries: result }));
-      })
-      .catch(error => {
-        console.error('Error fetching countries:', error);
-      });
-  }, []);
+  
   const handleCountryChange = (event) => {
     setState(prevState => ({ ...prevState, selectedCountry: event.target.value }));
   };
@@ -69,8 +54,8 @@ const handleClose = () => {
     const selectedProvince = event.target.value;
     setState(prev => ({ ...prev, selectedProvince }));
     const amphoesData = state.data
-      .filter(item => item.ProvinceThai === selectedProvince)
-      .map(item => item.DistrictThai);
+      .filter(item => item.ProvinceEng === selectedProvince)
+      .map(item => item.DistrictEng);
     setState(prev => ({
       ...prev,
       amphures: Array.from(new Set(amphoesData)).sort(),
@@ -83,8 +68,8 @@ const handleClose = () => {
     const selectedAmphoe = event.target.value;
     setState(prev => ({ ...prev, selectedAmphoe }));
     const tambonsData = state.data
-      .filter(item => item.DistrictThai === selectedAmphoe)
-      .map(item => item.TambonThai);
+      .filter(item => item.DistrictEng === selectedAmphoe)
+      .map(item => item.TambonEng);
     setState(prev => ({
       ...prev,
       tambons: Array.from(new Set(tambonsData)).sort(),
@@ -95,7 +80,7 @@ const handleClose = () => {
   const handleTambonChange = (event) => {
     const selectedTambon = event.target.value;
     setState(prev => ({ ...prev, selectedTambon }));
-    const tambonData = state.data.find(item => item.TambonThai === selectedTambon);
+    const tambonData = state.data.find(item => item.TambonEng === selectedTambon);
     if (tambonData) {
       setState(prev => ({ ...prev, zipcode: tambonData.PostCodeMain }));
     }
@@ -128,7 +113,7 @@ const handleClose = () => {
       address1: state.varidate.address1,
       address2: state.varidate.address2,
       role: state.role,
-      title: age
+      title: title
 })
 var requestOptions = {
   method: 'POST',
@@ -144,13 +129,13 @@ fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}/api/register`,requestOption
     router.push('/checkyouemail');
   }else
   {
-    setState((prevData) => ({ ...prevData,openpc:false, alert:true,errordetail: result.message,status:false }))
+    setState((prevData) => ({ ...prevData,openpc:false, alert:true,errordetail: result.messtitle,status:false }))
   }
 })
 }
   return (
     <Box  sx={{background:`linear-gradient(${themedata[0].primary}, ${themedata[0].three})`,width:'100%',height:"130vh"}}>
-      <Title namepage="Updateinformation" company="Partne Demo Tracthai"/>
+      <Title nameptitle="Updateinformation" company="Partne Demo Tracthai"/>
       <Box pt={3} sx={{display: "flex", alignItems: "center", justifyContent: "center" }}> 
       <Box p={1} sx={{ flexDirection:'column', background: 'white', width: '80%', height: '750px', borderRadius: 5, display: "flex", alignItems: "center", justifyContent: "center" }}> 
       <Box p={3}>
@@ -164,7 +149,7 @@ fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}/api/register`,requestOption
             <Grid item xs={4} pb={2}>
             <FormControl sx={{ width: '80px', height: '40px', pr: 0.5 }}>
               <InputLabel >title</InputLabel>
-              <Select size='small' value={age} label="Sex" onChange={handleChange1}>
+              <Select size='small' value={title} label="Sex" onChange={handleChange1}>
               <MenuItem value={"Mr"}>Mr.</MenuItem>
               <MenuItem value={"Mrs"}>Mrs.</MenuItem>
               <MenuItem value={"Miss"}>Miss.</MenuItem>
@@ -206,7 +191,6 @@ fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}/api/register`,requestOption
             </Select>
             </FormControl>
             </Grid>
-
             <Grid item xs={4}>
             <TextField fullWidth  label="Postal Code" variant="outlined" placeholder="Postal Code"  size='small'   value={state.zipcode}  InputProps={{ readOnly: true, }} style={{ width: '300px', height: '60px' }} focused />
             </Grid>     
@@ -282,7 +266,7 @@ fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}/api/register`,requestOption
           <Box p={1} sx={{color: `${themedata[0].ten}`, fontSize: 22, fontFamily: frontdata[0].font, fontWeight: '400', wordWrap: 'break-word'}}>Personal Details</Box>
           <Grid item  container  pl={15}  columnSpacing={{ xs: 1, sm: 2, md: 3 }} sx={{  width: '50%' }}>
             <Grid item xs={4} pb={2}>
-            <TextField disabled id="outlined-disabled"label="Disabled"value={age} size='small' sx={{ width: '15%' }}  />
+            <TextField disabled id="outlined-disabled"label="Disabled"value={title} size='small' sx={{ width: '15%' }}  />
               <TextField disabled id="outlined-disabled"label="Disabled"value={state.firstName} size='small' sx={{ width: '55%' }}  />
             </Grid>
             <Grid item xs={4}>

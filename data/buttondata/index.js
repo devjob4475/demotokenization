@@ -1,5 +1,6 @@
 export const buttontext =[
     {
-        "text" : "Next"
+        "text" : "Next",
+        "close" : "Close"
     }
 ]

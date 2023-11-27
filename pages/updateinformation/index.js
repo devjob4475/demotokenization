@@ -15,11 +15,11 @@ function Index() {
       mtemplaterow="0fr auto 0fr" mtemplateareas="'nav' 'content1' 'footer'"
       Content1={<Box><Pc/></Box>}/>
     </Box>
-    {/* <Box sx={{display:{xs:'flex',md:'none'}}}>
+    <Box sx={{display:{xs:'flex',md:'none'}}}>
       <Layout containerheight="auto" templaterow="0fr auto 0fr" templateareas="'nav' 'content1' 'footer'" 
       mtemplaterow="0fr auto 0fr" mtemplateareas="'nav' 'content1' 'footer'"
         Content1={<Box><Mobile/></Box>}/>
-    </Box> */}
+    </Box>
     </Box>
   ) 
 }
