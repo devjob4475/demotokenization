@@ -21,7 +21,7 @@ export const MyProvider = (props) => {
   "selectedAmphoe":(""),"selectedTambon":(""),"firstName":(""),"LastName":(""),"jobTitle":(""),"company_email":(""),
   "MobileNumber":(""),"CompanyName":(""),"Branch":(""),"Address":(""),"Address2":(""),"Website":(""),"Country":(""),
   "Confirmed":false,"Email":(""),"OpenAlert":false,"selectedCountry":(""),"math":false,"password":(""),"role":(""),
-  "company_name_en":(""),"alluser":[],"login_text":[],"color":[],"email":"","openpc":false,"varidate":[],"tambons":[],"title":'',"OpenAlert":false,
+  "company_name_en":(""),"alluser":[],"login_text":[],"color":[],"email":"","openpc":false,"varidate":[],"tambons":[],"title":'',"OpenAlert":false,'emailconfirm':""
 });
   return (
     <>

@@ -7,7 +7,6 @@ import { themedata } from 'data/themedata';
 import { frontdata } from 'data/frontdata'; 
 import {MyContext} from 'context'
 import { Router, useRouter } from 'next/router';
-import Title from '@/components/title';
 import { buttontext } from '@/data/buttondata';
 import Loading from '@/components/loading'
 
@@ -20,6 +19,12 @@ function index() {
   const router = useRouter();
   const [title, settitle] = React.useState('');
 
+  const emailquery = router.query.email;
+  useEffect(() => {
+    if(emailquery){
+      setState((prevData) => ({ ...prevData, emailconfirm: emailquery}));
+    }
+  }, [emailquery]);
   const handleChange1 = (event) => {
     settitle(event.target.value);
   };
@@ -94,13 +99,13 @@ const handleClose = () => {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     var raw = JSON.stringify({
-      username: state.email,
+      username: state.emailconfirm?state.emailconfirm:state.email,
       firstname: state.firstName,
       surname: state.LastName ,
       firstname_en: state.firstName,
       surname_en: state.LastName ,
       mobile_phone: state.MobileNumber,
-      personal_email: state.email,
+      personal_email: state.emailconfirm?state.emailconfirm:state.email,
       company_name: state.CompanyName,
       company_name_en: state.CompanyName,
       credit_card: "1234123412341238",
@@ -135,7 +140,6 @@ fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}/api/register`,requestOption
 }
   return (
     <Box  sx={{background:`linear-gradient(${themedata[0].primary}, ${themedata[0].three})`,width:'100%',height:"130vh"}}>
-      <Title nameptitle="Updateinformation" company="Partne Demo Tracthai"/>
       <Box pt={3} sx={{display: "flex", alignItems: "center", justifyContent: "center" }}> 
       <Box p={1} sx={{ flexDirection:'column', background: 'white', width: '80%', height: '750px', borderRadius: 5, display: "flex", alignItems: "center", justifyContent: "center" }}> 
       <Box p={3}>
@@ -244,7 +248,7 @@ fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}/api/register`,requestOption
             <TextField  id="jobTitle" name="jobTitle" label="Job Title"placeholder="Enter Your Job Title" size='small' value={state.jobTitle} onChange={handleInputChange}  style={{ width: '300px', height: '60px' }} focused color='primary'/>
             </Grid>
             <Grid item xs={4}>
-            <TextField disabled id="Email" name="company_email" label="Email"placeholder="example@thac.com" size='small'value={state.email} onChange={handleInputChange}  style={{ width: '300px', height: '60px' }} focused color='primary'/>
+            <TextField disabled id="Email" name="company_email" label="Email"placeholder="example@thac.com" size='small'value={state.emailconfirm?state.emailconfirm:state.email} onChange={handleInputChange}  style={{ width: '300px', height: '60px' }} focused color='primary'/>
             </Grid>     
             <Grid item xs={4}>
             <TextField  id="LastName" name="LastName" label="Last Name"placeholder="Enter Your Last Name" size='small' value={state.LastName} onChange={handleInputChange}  style={{ width: '300px', height: '60px' }} focused color='primary'/>
@@ -252,7 +256,6 @@ fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}/api/register`,requestOption
             <Grid item xs={4}>
             <TextField  id="MobileNumber" name="MobileNumber" label="Mobile Number"placeholder="Enter Your Mobile Number" size='small'value={state.MobileNumber} onChange={handleInputChange}   style={{ width: '300px', height: '60px' }} focused color='primary'/>
             </Grid> 
-           
           </Grid>
           </Box>
         <Box sx={{display: 'flex', justifyContent: 'center', mb:3}}>
@@ -310,7 +313,7 @@ fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}/api/register`,requestOption
               <TextField disabled id="outlined-disabled"label="Disabled" value={state.jobTitle} size='small' sx={{ width: '70%' }} />
             </Grid>
             <Grid item xs={4}>
-              <TextField disabled id="outlined-disabled"label="Disabled" value={state.email} size='small' sx={{ width: '70%' }} />
+              <TextField disabled id="outlined-disabled"label="Disabled" value={state.emailconfirm?state.emailconfirm:state.email} size='small' sx={{ width: '70%' }} />
             </Grid>     
             <Grid item xs={4}>
               <TextField disabled id="outlined-disabled"label="Disabled" value={state.LastName} size='small' sx={{ width: '70%' }} />

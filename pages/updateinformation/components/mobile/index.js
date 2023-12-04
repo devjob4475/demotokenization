@@ -19,6 +19,14 @@ function index() {
   const router = useRouter();
   const [title, settitle] = React.useState('');
 
+
+  const emailquery = router.query.email;
+  useEffect(() => {
+    if(emailquery){
+      setState((prevData) => ({ ...prevData, emailconfirm: emailquery}));
+    }
+  }, [emailquery]);
+
   const handleChange1 = (event) => {
     settitle(event.target.value);
   };
@@ -94,13 +102,13 @@ const handleClose = () => {
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({
-      username: state.email,
+      username: state.emailconfirm?state.emailconfirm:state.email,
       firstname: state.firstName,
       surname: state.LastName ,
       firstname_en: state.firstName,
       surname_en: state.LastName ,
       mobile_phone: state.MobileNumber,
-      personal_email: state.email,
+      personal_email: state.emailconfirm?state.emailconfirm:state.email,
       company_name: state.CompanyName,
       company_name_en: state.CompanyName,
       credit_card: "1234123412341238",
@@ -261,7 +269,7 @@ fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}/api/register`,requestOption
           <TextField  id="MobileNumber" name="MobileNumber" label="Mobile Number"placeholder="Enter Your Mobile Number" size='small'value={state.MobileNumber} onChange={handleInputChange}   style={{ width: '300px', height: '60px' }} focused color='primary'/>
           </Grid>
           <Grid item >
-          <TextField disabled id="Email" name="company_email" label="Email"placeholder="example@thac.com" size='small'value={state.email} onChange={handleInputChange}  style={{ width: '300px', height: '60px' }} focused color='primary'/>
+          <TextField disabled id="Email" name="company_email" label="Email"placeholder="example@thac.com" size='small'value={state.emailconfirm?state.emailconfirm:state.email} onChange={handleInputChange}  style={{ width: '300px', height: '60px' }} focused color='primary'/>
           </Grid>
           
         </Grid>
@@ -284,7 +292,7 @@ fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}/api/register`,requestOption
               <br></br>
               <TextField disabled id="outlined-disabled"label="Disabled" value={state.MobileNumber} size='small' sx={{ width: '70%' }} />
               <br></br>
-              <TextField disabled id="outlined-disabled"label="Disabled" value={state.email} size='small' sx={{ width: '70%' }} />
+              <TextField disabled id="outlined-disabled"label="Disabled" value={state.emailconfirm?state.emailconfirm:state.email} size='small' sx={{ width: '70%' }} />
          </Box>
           <Box p={2}/>
           <Divider/>

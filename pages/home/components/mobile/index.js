@@ -249,10 +249,10 @@ useEffect(() => {
               <Box sx={{fontFamily: frontdata[0].font, fontWeight: '800',fontSize:"20px"}}>Personal Infomation</Box>
               <Divider sx={{mt:3,mb:3}}/>
               {Object.entries(userInfo).map(([key, { value, icon }], index) => (
-              <Box key={`${index}`} sx={{mt:2,width:"auto",height:"35px",border:"1px solid #171717" ,borderRadius:"11px",background:"#fff",display:"flex",alignItems:"center",overflow: "hidden",justifyContent:'center',alignItems:'center'}}>
-                <Box sx={{ml:3,alignItems:"center",display:"flex"}}>{icon}</Box>
+              <Box key={`${index}`} sx={{mt:2,width:"310px",height:"55px",border:"1px solid #171717" ,borderRadius:"11px",background:"#fff",display:"flex",alignItems:"center",overflow: "hidden",textAlign:'left'}}>
+                <Box sx={{ml:1,alignItems:"center",display:"flex"}}>{icon}</Box>
                 <Box sx={{mt:0.2,ml:1,alignItems:"center",display:"flex",fontFamily: frontdata[0].font}}>{key}</Box>
-                <Box sx={{ml:key ==="Company"?1:key==="Password"?1:key==="Role"?6:key ==="Name"?4.5:key==="Email"?5:"",width:"1px",height:"25px",background:"#E1E1E1"}}/>
+                <Box sx={{ml:key ==="Company"?1:key==="Password"?1:key==="Role"?6:key ==="Name"?4.5:key==="Email"?5:"",height:"25px",background:"#E1E1E1"}}/>
                 <Box sx={{ml:2,pl:2,pr:2,fontFamily: frontdata[0].font}}>{showMask ? String(value) : "********************"}</Box>
               </Box>
                ))}
@@ -295,15 +295,12 @@ useEffect(() => {
             {personal.role==="admin" && Localalluser.map((user, index) => (
             <table key={`${index}`} className="gfg">
         			<tr style={{fontFamily: frontdata[0].font}}>
-  
                 <Box>
                 <ListItemButton onClick={handleToggleCollapse} sx={{ display: 'flex', alignItems: "center", justifyContent: "flex-start" }}>
                   <Image style={{ width: "20px", height: "auto" }} src={Account} alt='email' />&nbsp;
-                 <Box sx={{overflow: 'hidden', textOverflow: 'ellipsis'}}>{showMaskAccount ? showPasswordAcount ? user.UsernameOriginal : user.Username : '********'}</Box>
-                  
+                 <Box sx={{overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '100px',width:'100px'}}>{showMaskAccount ? showPasswordAcount ? user.UsernameOriginal : user.Username : '********'}</Box>
                   {open ? <ExpandLess /> : <ExpandMore />}
                 </ListItemButton>
-
                 <Collapse in={open} timeout="auto" unmountOnExit>
                   <List component="div" disablePadding>
                     <ListItemButton sx={{width:'300px'}}>
@@ -320,16 +317,13 @@ useEffect(() => {
                         <TableCell>
                          <Box > <strong>Role</strong> {showMaskAccount ? user.Role : '********'}</Box>
                         </TableCell>
-                        <TableCell>
-                          
-                        </TableCell>
+                    
                       
                     </ListItemButton>
                   </List>
                 </Collapse>
               </Box>
              
-        				
         				<td><IconButton sx={{
                   paddingLeft:13,
                   animation: deleteStates[user.ID]

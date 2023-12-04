@@ -29,13 +29,13 @@ const handleSubmit = async () => {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     var raw = JSON.stringify({
-      username: state.email,
+        username: state.emailconfirm?state.emailconfirm:state.email,
         firstname: state.firstName,
         surname: state.LastName ,
         firstname_en: state.firstName,
         surname_en: state.LastName ,
         mobile_phone: state.MobileNumber,
-        personal_email: state.email,
+        personal_email: state.emailconfirm?state.emailconfirm:state.email,
         company_name: state.varidate.company_name_en_original,
         company_name_en: state.varidate.company_name_en_original,
         credit_card: "1234123412341238",
@@ -134,7 +134,7 @@ fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}/api/register`,requestOption
             <TextField disabled id="jobTitle" name="jobTitle" label="Job Title"placeholder="Enter Your Job Title" size='small' value={state.jobTitle}   sx={{ width: '300px', height: '60px' }} focused color='primary'/>
             </Grid>
             <Grid item xs={4}>
-            <TextField disabled id="Email" name="company_email" label="Email"placeholder="example@thac.com" size='small'value={state.email}   sx={{ width: '300px', height: '60px' }} focused color='primary'/>
+            <TextField disabled id="Email" name="company_email" label="Email"placeholder="example@thac.com" size='small'value={state.emailconfirm?state.emailconfirm:state.email} sx={{ width: '300px', height: '60px' }} focused color='primary'/>
             </Grid>     
             <Grid item xs={4}>
             <TextField  id="LastName" name="LastName" label="Last Name"placeholder="Enter Your Last Name" size='small' value={state.LastName}   sx={{ width: '300px', height: '60px' }} focused color='primary'/>

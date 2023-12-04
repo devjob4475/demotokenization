@@ -17,6 +17,7 @@ import Dialogpc   from '../dialogpc/index'
   const handleChange1 = (event) => {
     setState(prevData => ({ ...prevData, title: event.target.value }));
 };
+
   const handleChange = (event) => {
         setState(prevState => ({ ...prevState, role: event.target.value }));
 };
@@ -117,7 +118,7 @@ import Dialogpc   from '../dialogpc/index'
             <TextField  id="jobTitle" name="jobTitle" label="Job Title"placeholder="Enter Your Job Title" size='small' value={state.jobTitle} onChange={handleInputChange}  sx={{ width: '300px', height: '60px' }} focused color='primary'/>
             </Grid>
             <Grid item xs={4}>
-            <TextField disabled id="Email" name="company_email" label="Email"placeholder="example@thac.com" size='small'value={state.email} onChange={handleInputChange}  sx={{ width: '300px', height: '60px' }} focused color='primary'/>
+            <TextField disabled id="Email" name="company_email" label="Email"placeholder="example@thac.com" size='small'value={state.emailconfirm?state.emailconfirm:state.email} onChange={handleInputChange}  sx={{ width: '300px', height: '60px' }} focused color='primary'/>
             </Grid>     
             <Grid item xs={4}>
             <TextField  id="LastName" name="LastName" label="Last Name"placeholder="Enter Your Last Name" size='small' value={state.LastName} onChange={handleInputChange}  sx={{ width: '300px', height: '60px' }} focused color='primary'/>
