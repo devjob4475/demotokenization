@@ -218,7 +218,7 @@ useEffect(() => {
   return (
       <Box  sx={{width:"110%",height:"150vh",background: `linear-gradient(108deg, ${themedata[0].primary} 0%, ${themedata[0].bgshadowwhite} 100%), linear-gradient(110deg, ${themedata[0].greenlight} -2.13%, ${themedata[0].greenblack} 102.03%), ${themedata[0].three}`,display:"flex",justifyContent:"center",flexDirection:"column",alignItems:"center",position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}} >
         <Box position="absolute" sx={{width:"90%",height:"auto",display:"flex",flexDirection:"column"}}>
-        <Box sx={{display:'flex',ml:3,mb:-0.5}}>
+        <Box sx={{display:'flex',ml:5,mb:-0.5}}>
           <Box onClick={()=>{
             setInfo(0);
             setShowMaskAccount(false);
@@ -238,22 +238,22 @@ useEffect(() => {
             setInfo(1);
             setMaskingEnabled(false);
           }
-            } sx={{cursor:"pointer",ml:1,width: "160px",height: "54px",flexShrink: 0,background:info===1?"#fff":"#FDFDFD",color:info===1?"":"#B6B6B6",borderRadius:"14px 14px 0px 0px",display:"flex",justifyContent:"center",alignItems:"center",fontFamily: frontdata[0].font, fontWeight: '800'}}>
+            } sx={{cursor:"pointer",width: "160px",height: "54px",flexShrink: 0,background:info===1?"#fff":"#FDFDFD",color:info===1?"":"#B6B6B6",borderRadius:"14px 14px 0px 0px",display:"flex",justifyContent:"center",alignItems:"center",fontFamily: frontdata[0].font, fontWeight: '800'}}>
             <Box>All User</Box>
           </Box>
           ):("")}
         </Box>
-          <Box sx={{p:5,width: "auto",height: "auto",flexShrink: 0,borderRadius:"30px",background:"#fff",boxShadow:"0px 13px 68px 0px rgba(0, 0, 0, 0.13),",overflow: "hidden",}}>
+          <Box  sx={{p:5,ml:2,width: "auto",height: "auto",flexShrink: 0,borderRadius:"30px",background:"#fff",boxShadow:"0px 13px 68px 0px rgba(0, 0, 0, 0.13),",overflow: "hidden",justifyContent:'center',alignItems:'center'}}>
             {info===0?(
               <>
               <Box sx={{fontFamily: frontdata[0].font, fontWeight: '800',fontSize:"20px"}}>Personal Infomation</Box>
               <Divider sx={{mt:3,mb:3}}/>
               {Object.entries(userInfo).map(([key, { value, icon }], index) => (
-              <Box key={`${index}`} sx={{mt:2,width:"auto",height:"35px",border:"1px solid #171717" ,borderRadius:"11px",background:"#fff",display:"flex",alignItems:"center",overflow: "hidden"}}>
+              <Box key={`${index}`} sx={{mt:2,width:"auto",height:"35px",border:"1px solid #171717" ,borderRadius:"11px",background:"#fff",display:"flex",alignItems:"center",overflow: "hidden",justifyContent:'center',alignItems:'center'}}>
                 <Box sx={{ml:3,alignItems:"center",display:"flex"}}>{icon}</Box>
                 <Box sx={{mt:0.2,ml:1,alignItems:"center",display:"flex",fontFamily: frontdata[0].font}}>{key}</Box>
                 <Box sx={{ml:key ==="Company"?1:key==="Password"?1:key==="Role"?6:key ==="Name"?4.5:key==="Email"?5:"",width:"1px",height:"25px",background:"#E1E1E1"}}/>
-                <Box sx={{ml:2,pl:2,pr:2,fontFamily: frontdata[0].font}}>{showMask ? value : "********************"}</Box>
+                <Box sx={{ml:2,pl:2,pr:2,fontFamily: frontdata[0].font}}>{showMask ? String(value) : "********************"}</Box>
               </Box>
                ))}
                <Box ml={-0.5} display="flex" alignItems="center" justifyContent="flex-start">
@@ -295,7 +295,7 @@ useEffect(() => {
             {personal.role==="admin" && Localalluser.map((user, index) => (
             <table key={`${index}`} className="gfg">
         			<tr style={{fontFamily: frontdata[0].font}}>
-        				
+  
                 <Box>
                 <ListItemButton onClick={handleToggleCollapse} sx={{ display: 'flex', alignItems: "center", justifyContent: "flex-start" }}>
                   <Image style={{ width: "20px", height: "auto" }} src={Account} alt='email' />&nbsp;

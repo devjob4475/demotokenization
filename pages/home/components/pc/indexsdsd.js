@@ -308,7 +308,7 @@ useEffect(() => {
                 <Box sx={{ml:3,alignItems:"center",display:"flex"}}>{icon}</Box>
                 <Box sx={{mt:0.2,ml:1,alignItems:"center",display:"flex",fontFamily: frontdata[0].font}}>{key}</Box>
                 <Box sx={{ml:key ==="Company"?1:key==="Password"?1:key==="Role"?6:key ==="Name"?4.5:key==="Email"?5:"",width:"1px",height:"25px",background:"#E1E1E1"}}/>
-                <Box sx={{ml:2,pl:2,pr:2,fontFamily: frontdata[0].font}}>{showMask ? value : "********************"}</Box>
+                <Box sx={{ml:2,pl:2,pr:2,fontFamily: frontdata[0].font}}>{showMask ? String(value) : "********************"}</Box>
               </Box>
                ))}
                <Box ml={-0.5} display="flex" alignItems="center" justifyContent="flex-start">

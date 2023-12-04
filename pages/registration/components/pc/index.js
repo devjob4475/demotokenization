@@ -11,9 +11,6 @@ import Loading from '@/components/loading'
 import { Container } from '@mui/system';
 import Dialogpc   from '../dialogpc/index'
 
-  const Transition = React.forwardRef(function Transition(props, ref) {
-    return <Slide direction="up" ref={ref} {...props} />;
-    });
     function index() {
   const [state, setState] = useContext(MyContext);
   const router = useRouter();
