@@ -32,7 +32,7 @@ function index() {
 const [openAlert, setOpenAlert] = useState(false);
 
 const handleClickOpen = () => {
-   if (state.firstName && state.LastName && state.jobTitle && state.email && state.MobileNumber && state.CompanyName ) {
+   if (state.firstName && state.LastName && state.jobTitle &&  state.MobileNumber && state.CompanyName ) {
       setState((prevData) => ({ ...prevData, open: true }))
     
     console.log(state)
@@ -101,17 +101,17 @@ const handleClose = () => {
       surname_en: state.LastName ,
       mobile_phone: state.MobileNumber,
       personal_email: state.email,
-      company_name: state.varidate.company_name_en_original,
-      company_name_en: state.varidate.company_name_en_original,
+      company_name: state.CompanyName,
+      company_name_en: state.CompanyName,
       credit_card: "1234123412341238",
-      country: state.varidate.country,
-      province: state.varidate.province,
-      amphoe: state.varidate.amphoe,
-      tambon: state.varidate.tambon,
-      zipcode: state.varidate.zipcodezipcode,
-      website: state.varidate.website,
-      address1: state.varidate.address1,
-      address2: state.varidate.address2,
+      country: state.selectedCountry,
+      province: state.selectedProvince,
+      amphoe: state.selectedAmphoe,
+      tambon: state.selectedTambon,
+      zipcode: state.zipcode,
+      website: state.Website,
+      address1: state.Address,
+      address2: state.Address2,
       role: state.role,
       title: title
 })
@@ -147,7 +147,6 @@ fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}/api/register`,requestOption
         <Box sx={{width: '100%',  border: `1px ${themedata[0].four} solid`}}>  
         </Box>
         <Box>
-          
         <Box pt={2} pb={2} sx={{color: `${themedata[0].ten}`, fontSize: 15, fontFamily: frontdata[0].font, fontWeight: '800', wordWrap: 'break-word', textAlign: 'left'}}>Company Details</Box>
         </Box>
         <Grid container spacing={0.5} sx={{flexDirection:'column', justifyContent: 'center', alignItems: 'center'}} > 

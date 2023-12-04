@@ -10,7 +10,7 @@ import DeveloperModeIcon from '@mui/icons-material/DeveloperMode';
 function Index() {
 
   return (
-    <Box sx={{background:`linear-gradient(${themedata[0].primary}, ${themedata[0].three})`}}>
+    <Box>
           <Title namepage="Home" company="Partner Demo Tracthai"/>
     <Box sx={{display:{sm:"none",xs:'none',md:'flex'}}}>   
       <Layout containerheight="auto" templaterow="0fr auto 0fr" templateareas="'nav' 'content1' 'footer'" 
@@ -22,10 +22,14 @@ function Index() {
       mtemplaterow="0fr auto 0fr" mtemplateareas="'nav' 'content1' 'footer'"
         Content1={<Box>
           {/* <Mobile/> */}
-          <Box sx={{width:"80%",display:"flex",flexDirection:"column",textAlign:"center",position:"absolute",height:"auto",top:"50%",left:"50%",transform:"translate(-50%,-50%)",display:"flex",alignItems:"center",fontFamily:frontdata[0].font,fontWeight:500,fontSize:"30px"}}>
+          {/* <Mobile/> */}
+            
+
+
+          {/* <Box sx={{width:"80%",display:"flex",flexDirection:"column",textAlign:"center",position:"absolute",height:"auto",top:"50%",left:"50%",transform:"translate(-50%,-50%)",display:"flex",alignItems:"center",fontFamily:frontdata[0].font,fontWeight:500,fontSize:"30px"}}>
             
             <DeveloperModeIcon sx={{fontSize:"40px",animation: "rotate 2s infinite linear" }}/><Box sx={{mt:2}}>Work in Progress: Mobile Version Coming Soon!</Box>
-          </Box>
+          </Box> */}
         </Box>}/>
     </Box>
     </Box>

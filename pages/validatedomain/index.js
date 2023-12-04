@@ -12,6 +12,7 @@ import Loading from '@/components/loading'
 
 function Index() {
   const [state, setState] = useContext(MyContext);
+  
   const [openAlert, setOpenAlert] = useState(false);
   const router = useRouter(); 
   const handleEmailChange = (event) => {

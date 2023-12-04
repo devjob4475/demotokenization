@@ -56,53 +56,54 @@ const handleInputChange = (event) => {
   }));
 };
 
-const handleSubmit = async () => {
-  setState(prev => ({ ...prev, loading: true }));
+      const handleSubmit = async () => {
+        setState(prev => ({ ...prev, loading: true }));
 
-  var myHeaders = new Headers();
-myHeaders.append("Content-Type", "application/json");
+        var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
 
-var raw = JSON.stringify({
-username: state.email,
-firstname: state.firstName,
-surname: state.LastName ,
-firstname_en: state.firstName,
-surname_en: state.LastName ,
-mobile_phone: state.MobileNumber,
-personal_email: state.email,
-company_name: state.varidate.company_name_en_original,
-company_name_en: state.varidate.company_name_en_original,
-credit_card: "1234123412341238",
-country: state.varidate.country,
-province: state.varidate.province,
-amphoe: state.varidate.amphoe,
-tambon: state.varidate.tambon,
-zipcode: state.varidate.zipcodezipcode,
-website: state.varidate.website,
-address1: state.varidate.address1,
-address2: state.varidate.address2,
-role: state.role,
-title: title
-});
+      var raw = JSON.stringify({
+        username: state.email,
+        firstname: state.firstName,
+        surname: state.LastName ,
+        firstname_en: state.firstName,
+        surname_en: state.LastName ,
+        mobile_phone: state.MobileNumber,
+        personal_email: state.email,
+        company_name: state.varidate.company_name_en_original,
+        company_name_en: state.varidate.company_name_en_original,
+        credit_card: "1234123412341238",
+        country: state.varidate.country,
+        province: state.varidate.province,
+        amphoe: state.varidate.amphoe,
+        tambon: state.varidate.tambon,
+        zipcode: state.varidate.zipcode,
+        website: state.varidate.website,
+        address1: state.varidate.address1,
+        address2: state.varidate.address2,
+        role: state.role,
+        title: title
+        });
 
-var requestOptions = {
-method: 'POST',
-headers: myHeaders,
-body: raw,
-redirect: 'follow'
-};
-fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}/api/register`,requestOptions)
-.then(response => response.json())
-.then(result => {  
-if (result.status === "OK") {
-  setState(prev => ({ ...prev, loading:false  }));
-  router.push('/checkyouemail');
-}else
-{
-  setState((prevData) => ({ ...prevData,openpc:false, alert:true,errordetail: result.message,status:false }))
-}
-})
-}
+      var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+      };
+      fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}/api/register`,requestOptions)
+      .then(response => response.json())
+      .then(result => {  
+      if (result.status === "OK") {
+        setState(prev => ({ ...prev, loading:false  }));
+        router.push('/checkyouemail');
+      }else
+      {
+        setState((prevData) => ({ ...prevData, open: false }));
+        setState((prevData) => ({ ...prevData,openpc:false, alert:true,errordetail: result.message,status:false }))
+      }
+      })
+      }
   return (
     <Box pt={3} pb={10}  sx={{background:`linear-gradient(${themedata[0].primary}, ${themedata[0].three})`,width:'100%',height:"auto",display: "flex",justifyContent: "center", alignItems: "center"}}>
       <Box sx={{display: "flex", alignItems: "center", justifyContent: "center" }}> 

@@ -33,7 +33,7 @@ function index() {
 const [openAlert, setOpenAlert] = useState(false);
 
 const handleClickOpen = () => {
-   if (state.firstName && state.LastName && state.jobTitle && state.email && state.MobileNumber && state.CompanyName ) {
+   if (state.firstName && state.LastName && state.jobTitle && state.MobileNumber && state.CompanyName ) {
       setState((prevData) => ({ ...prevData, openpc: true }))
       
   } else {
@@ -101,17 +101,17 @@ const handleClose = () => {
       surname_en: state.LastName ,
       mobile_phone: state.MobileNumber,
       personal_email: state.email,
-      company_name: state.varidate.company_name_en_original,
-      company_name_en: state.varidate.company_name_en_original,
+      company_name: state.CompanyName,
+      company_name_en: state.CompanyName,
       credit_card: "1234123412341238",
-      country: state.varidate.country,
-      province: state.varidate.province,
-      amphoe: state.varidate.amphoe,
-      tambon: state.varidate.tambon,
-      zipcode: state.varidate.zipcodezipcode,
-      website: state.varidate.website,
-      address1: state.varidate.address1,
-      address2: state.varidate.address2,
+      country: state.selectedCountry,
+      province: state.selectedProvince,
+      amphoe: state.selectedAmphoe,
+      tambon: state.selectedTambon,
+      zipcode: state.zipcode,
+      website: state.Website,
+      address1: state.Address,
+      address2: state.Address2,
       role: state.role,
       title: title
 })
@@ -143,39 +143,10 @@ fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}/api/register`,requestOption
           <Box pb={3} sx={{color:  `${themedata[0].four}`, fontSize: 15, fontFamily: frontdata[0].font, fontWeight: '0', textAlign: 'left'}}>
               Please fill in the form. All fields marked with (*) shall be required.</Box>
           <Divider/>
-          <Box p={1} sx={{color: `${themedata[0].four}`, fontSize: 22, fontFamily: frontdata[0].font, fontWeight: '400', wordWrap: 'break-word'}}>Personal Details</Box>
-          <br></br>
-          <Grid item  container  pl={5}  columnSpacing={{ xs: 1, sm: 2, md: 3 }} sx={{  width: '50%' }}>
-            <Grid item xs={4} pb={2}>
-            <FormControl sx={{ width: '80px', height: '40px', pr: 0.5 }}>
-              <InputLabel >title</InputLabel>
-              <Select size='small' value={title} label="Sex" onChange={handleChange1}>
-              <MenuItem value={"Mr"}>Mr.</MenuItem>
-              <MenuItem value={"Mrs"}>Mrs.</MenuItem>
-              <MenuItem value={"Miss"}>Miss.</MenuItem>
-              </Select>
-            </FormControl>
-            <TextField  id="firstName" name="firstName" label="First Name"placeholder="Enter Your First Name" size='small' value={state.firstName} onChange={handleInputChange} sx={{ width: '215px', height: '60px' }} focused color='primary'/>
-            </Grid>
-            <Grid item xs={4}>
-            <TextField  id="jobTitle" name="jobTitle" label="Job Title"placeholder="Enter Your Job Title" size='small' value={state.jobTitle} onChange={handleInputChange}  style={{ width: '300px', height: '60px' }} focused color='primary'/>
-            </Grid>
-            <Grid item xs={4}>
-            <TextField disabled id="Email" name="company_email" label="Email"placeholder="example@thac.com" size='small'value={state.email} onChange={handleInputChange}  style={{ width: '300px', height: '60px' }} focused color='primary'/>
-            </Grid>     
-            <Grid item xs={4}>
-            <TextField  id="LastName" name="LastName" label="Last Name"placeholder="Enter Your Last Name" size='small' value={state.LastName} onChange={handleInputChange}  style={{ width: '300px', height: '60px' }} focused color='primary'/>
-            </Grid> 
-            <Grid item xs={4}>
-            <TextField  id="MobileNumber" name="MobileNumber" label="Mobile Number"placeholder="Enter Your Mobile Number" size='small'value={state.MobileNumber} onChange={handleInputChange}   style={{ width: '300px', height: '60px' }} focused color='primary'/>
-            </Grid> 
-          </Grid>
-          <Box p={2}/>
-          <Divider/>
           <Box p={1} sx={{color: `${themedata[0].four}`, fontSize: 22, fontFamily: frontdata[0].font, fontWeight: '400', wordWrap: 'break-word'}}>Company Details</Box>
           <br></br>
-          <Grid container  pl={5}  columnSpacing={{ xs: 1, sm: 2, md: 3 }} sx={{  width: '50%' }}>
-            <Grid item xs={4} pb={2}>
+          <Grid item  container  pl={5}  columnSpacing={{ xs: 1, sm: 2, md: 3 }} sx={{  width: '50%' }}>
+          <Grid item xs={4} pb={2}>
             <TextField  id="CompanyName" name="CompanyName"  label="Company Name"placeholder="Enter Company Name" size='small'value={state.CompanyName} onChange={handleInputChange}  style={{ width: '300px', height: '60px' }} focused color='primary'/>
             </Grid>
             <Grid item xs={4}>
@@ -253,6 +224,36 @@ fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}/api/register`,requestOption
             </FormControl>
           </Grid> 
           </Grid>
+          <Box p={2}/>
+          <Divider/>
+          <Box p={1} sx={{color: `${themedata[0].four}`, fontSize: 22, fontFamily: frontdata[0].font, fontWeight: '400', wordWrap: 'break-word'}}>Personal Details</Box>
+          <br></br>
+          <Grid container  pl={5}  columnSpacing={{ xs: 1, sm: 2, md: 3 }} sx={{  width: '50%' }}>
+          <Grid item xs={4} pb={2}>
+            <FormControl sx={{ width: '80px', height: '40px', pr: 0.5 }}>
+              <InputLabel >title</InputLabel>
+              <Select size='small' value={title} label="Sex" onChange={handleChange1}>
+              <MenuItem value={"Mr"}>Mr.</MenuItem>
+              <MenuItem value={"Mrs"}>Mrs.</MenuItem>
+              <MenuItem value={"Miss"}>Miss.</MenuItem>
+              </Select>
+            </FormControl>
+            <TextField  id="firstName" name="firstName" label="First Name"placeholder="Enter Your First Name" size='small' value={state.firstName} onChange={handleInputChange} sx={{ width: '215px', height: '60px' }} focused color='primary'/>
+            </Grid>
+            <Grid item xs={4}>
+            <TextField  id="jobTitle" name="jobTitle" label="Job Title"placeholder="Enter Your Job Title" size='small' value={state.jobTitle} onChange={handleInputChange}  style={{ width: '300px', height: '60px' }} focused color='primary'/>
+            </Grid>
+            <Grid item xs={4}>
+            <TextField disabled id="Email" name="company_email" label="Email"placeholder="example@thac.com" size='small'value={state.email} onChange={handleInputChange}  style={{ width: '300px', height: '60px' }} focused color='primary'/>
+            </Grid>     
+            <Grid item xs={4}>
+            <TextField  id="LastName" name="LastName" label="Last Name"placeholder="Enter Your Last Name" size='small' value={state.LastName} onChange={handleInputChange}  style={{ width: '300px', height: '60px' }} focused color='primary'/>
+            </Grid> 
+            <Grid item xs={4}>
+            <TextField  id="MobileNumber" name="MobileNumber" label="Mobile Number"placeholder="Enter Your Mobile Number" size='small'value={state.MobileNumber} onChange={handleInputChange}   style={{ width: '300px', height: '60px' }} focused color='primary'/>
+            </Grid> 
+           
+          </Grid>
           </Box>
         <Box sx={{display: 'flex', justifyContent: 'center', mb:3}}>
         <Button variant="contained" onClick={handleClickOpen} sx={{color:'white', textTransform:'capitalize', width: '200px', height: 'auto'}}>Next</Button>
@@ -263,30 +264,9 @@ fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}/api/register`,requestOption
           <Box pb={3} sx={{color:  `${themedata[0].four}`, fontSize: 15, fontFamily: frontdata[0].font, fontWeight: '0', textAlign: 'left'}}>
               Please fill in the form. All fields marked with (*) shall be required.</Box>
           <Divider/>
-          <Box p={1} sx={{color: `${themedata[0].ten}`, fontSize: 22, fontFamily: frontdata[0].font, fontWeight: '400', wordWrap: 'break-word'}}>Personal Details</Box>
+          <Box p={1} sx={{color: `${themedata[0].ten}`, fontSize: 22, fontFamily: frontdata[0].font, fontWeight: '400', wordWrap: 'break-word'}}>Company Details</Box>
           <Grid item  container  pl={15}  columnSpacing={{ xs: 1, sm: 2, md: 3 }} sx={{  width: '50%' }}>
-            <Grid item xs={4} pb={2}>
-            <TextField disabled id="outlined-disabled"label="Disabled"value={title} size='small' sx={{ width: '15%' }}  />
-              <TextField disabled id="outlined-disabled"label="Disabled"value={state.firstName} size='small' sx={{ width: '55%' }}  />
-            </Grid>
-            <Grid item xs={4}>
-              <TextField disabled id="outlined-disabled"label="Disabled" value={state.jobTitle} size='small' sx={{ width: '70%' }} />
-            </Grid>
-            <Grid item xs={4}>
-              <TextField disabled id="outlined-disabled"label="Disabled" value={state.email} size='small' sx={{ width: '70%' }} />
-            </Grid>     
-            <Grid item xs={4}>
-              <TextField disabled id="outlined-disabled"label="Disabled" value={state.LastName} size='small' sx={{ width: '70%' }} />
-            </Grid> 
-            <Grid item xs={4}>
-              <TextField disabled id="outlined-disabled"label="Disabled" value={state.MobileNumber} size='small' sx={{ width: '70%' }} />
-            </Grid> 
-          </Grid>
-          <Box p={2}/>
-          <Divider/>
-          <Box p={3} sx={{color: `${themedata[0].ten}`, fontSize: 22, fontFamily: frontdata[0].font, fontWeight: '400', wordWrap: 'break-word'}}>Company Details</Box>
-          <Grid item  container  pl={15}  columnSpacing={{ xs: 1, sm: 2, md: 3 }} sx={{  width: '50%' }}>
-            <Grid item  xs={4} pb={2}>
+          <Grid item  xs={4} pb={2}>
               <TextField disabled id="outlined-disabled"label="Disabled"value={state.CompanyName} size='small' sx={{ width: '70%' }} />
             </Grid>
             <Grid item xs={4}>
@@ -317,6 +297,28 @@ fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT_LOGIN}/api/register`,requestOption
             <Grid item xs={4}>
               <TextField disabled id="outlined-disabled"label="Disabled"value={state.selectedTambon} size='small' sx={{ width: '70%' }} />
             </Grid> 
+          </Grid>
+          <Box p={2}/>
+          <Divider/>
+          <Box p={3} sx={{color: `${themedata[0].ten}`, fontSize: 22, fontFamily: frontdata[0].font, fontWeight: '400', wordWrap: 'break-word'}}>Personal Details</Box>
+          <Grid item  container  pl={15}  columnSpacing={{ xs: 1, sm: 2, md: 3 }} sx={{  width: '50%' }}>
+          <Grid item xs={4} pb={2}>
+            <TextField disabled id="outlined-disabled"label="Disabled"value={title} size='small' sx={{ width: '15%' }}  />
+              <TextField disabled id="outlined-disabled"label="Disabled"value={state.firstName} size='small' sx={{ width: '55%' }}  />
+            </Grid>
+            <Grid item xs={4}>
+              <TextField disabled id="outlined-disabled"label="Disabled" value={state.jobTitle} size='small' sx={{ width: '70%' }} />
+            </Grid>
+            <Grid item xs={4}>
+              <TextField disabled id="outlined-disabled"label="Disabled" value={state.email} size='small' sx={{ width: '70%' }} />
+            </Grid>     
+            <Grid item xs={4}>
+              <TextField disabled id="outlined-disabled"label="Disabled" value={state.LastName} size='small' sx={{ width: '70%' }} />
+            </Grid> 
+            <Grid item xs={4}>
+              <TextField disabled id="outlined-disabled"label="Disabled" value={state.MobileNumber} size='small' sx={{ width: '70%' }} />
+            </Grid> 
+           
           </Grid>
           <Box p={1} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <FormControlLabel control={<Checkbox checked={state.Confirmed} onChange={handleCheckboxChange}/>} label="Confirm information is correct" />

@@ -8,7 +8,8 @@ import { frontdata } from 'data/frontdata';
 import Title from '@/components/title';
 import Loading from '@/components/loading'
 import { buttontext } from '@/data/buttondata';
-import {MyContext} from 'context'
+import {MyContext} from 'context';
+
 function Index() {
   
   const [state, setState] = useContext(MyContext);
